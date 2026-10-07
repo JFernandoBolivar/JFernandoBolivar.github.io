@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>José Fernando Bolívar · Backend Developer</title>
+<meta name="description" content="José Fernando Bolívar — Ingeniero de Sistemas y desarrollador backend. Python, Django REST Framework, NestJS, PostgreSQL y APIs REST.">
+<meta property="og:title" content="José Fernando Bolívar · Backend Developer">
+<meta property="og:description" content="APIs REST seguras, sistemas en producción y automatización. Python · Django · NestJS · PostgreSQL.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%2306b6d4'/><text x='50%25' y='56%25' font-family='monospace' font-size='28' font-weight='700' fill='%230b1120' text-anchor='middle' dominant-baseline='middle'>JB</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b1120; --bg2:#0f172a; --card:#111a2e; --line:#1e293b; --text:#e2e8f0; --muted:#94a3b8;
+  --accent:#22d3ee; --accent2:#a78bfa; --accent3:#34d399; --shadow:0 10px 40px rgba(0,0,0,.35);
+  --grid:rgba(148,163,184,.06);
+}
+[data-theme="light"]{
+  --bg:#f8fafc; --bg2:#eef2f7; --card:#ffffff; --line:#e2e8f0; --text:#0f172a; --muted:#475569;
+  --accent:#0891b2; --accent2:#7c3aed; --accent3:#059669; --shadow:0 10px 30px rgba(15,23,42,.08);
+  --grid:rgba(15,23,42,.05);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;transition:background .4s,color .4s}
+a{color:inherit;text-decoration:none}
+.mono{font-family:"JetBrains Mono",monospace}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+section{padding:110px 0;position:relative}
+.grad{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* progress + glow */
+#progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));z-index:100}
+#glow{position:fixed;width:500px;height:500px;border-radius:50%;pointer-events:none;z-index:0;background:radial-gradient(circle,rgba(34,211,238,.10),transparent 60%);transform:translate(-50%,-50%);transition:opacity .3s}
+[data-theme="light"] #glow{opacity:.5}
+
+/* nav */
+nav{position:fixed;top:0;width:100%;z-index:50;transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+nav.scrolled{background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(12px);border-color:var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{font-weight:800;font-size:1.15rem;letter-spacing:-.02em}
+.logo span{color:var(--accent)}
+.links{display:flex;gap:26px;font-size:.92rem;color:var(--muted)}
+.links a{position:relative;transition:color .2s}
+.links a:hover,.links a.active{color:var(--text)}
+.links a.active::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;background:var(--accent);border-radius:2px}
+.tools{display:flex;gap:8px}
+.btn-ico{height:36px;min-width:36px;padding:0 10px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--text);cursor:pointer;font:600 .8rem Inter;display:grid;place-items:center;transition:transform .2s,border-color .2s}
+.btn-ico:hover{transform:translateY(-2px);border-color:var(--accent)}
+.burger{display:none}
+
+/* hero */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;padding-top:90px;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(ellipse at 50% 40%,#000 30%,transparent 75%)}
+.blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.35;animation:float 14s ease-in-out infinite}
+.b1{width:420px;height:420px;background:var(--accent);top:-80px;right:-60px}
+.b2{width:360px;height:360px;background:var(--accent2);bottom:-100px;left:-80px;animation-delay:-6s}
+@keyframes float{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(40px,30px) scale(1.1)}}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:50px;align-items:center;position:relative;z-index:2}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border:1px solid var(--line);border-radius:99px;background:var(--card);font-size:.82rem;color:var(--muted)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--accent3);box-shadow:0 0 0 0 var(--accent3);animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(52,211,153,.6)}100%{box-shadow:0 0 0 10px rgba(52,211,153,0)}}
+h1{font-size:clamp(2.4rem,5.4vw,4rem);line-height:1.05;letter-spacing:-.035em;margin:20px 0 14px;font-weight:800}
+.role{font-size:clamp(1.1rem,2.2vw,1.45rem);color:var(--muted);min-height:2.2em}
+.role b{color:var(--text);font-weight:600}
+.caret{display:inline-block;width:2px;height:1.1em;background:var(--accent);vertical-align:-3px;margin-left:3px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.lead{max-width:560px;color:var(--muted);margin:18px 0 30px;font-size:1.05rem}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:12px;font-weight:600;font-size:.95rem;transition:transform .2s,box-shadow .2s,background .2s;border:1px solid var(--line)}
+.btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#0b1120;border:none;box-shadow:0 8px 30px rgba(34,211,238,.25)}
+.btn:hover{transform:translateY(-3px)}
+.btn.ghost{background:var(--card)}
+.btn.ghost:hover{border-color:var(--accent)}
+.socials{display:flex;gap:10px;margin-top:28px}
+.socials a{width:42px;height:42px;display:grid;place-items:center;border:1px solid var(--line);border-radius:12px;background:var(--card);transition:transform .2s,border-color .2s,color .2s;color:var(--muted)}
+.socials a:hover{transform:translateY(-3px);border-color:var(--accent);color:var(--accent)}
+.socials svg{width:19px;height:19px;fill:currentColor}
+
+/* terminal */
+.term{background:#0a0f1c;border:1px solid #1e293b;border-radius:16px;box-shadow:var(--shadow);overflow:hidden;transform:perspective(1000px) rotateY(-6deg) rotateX(3deg);transition:transform .5s}
+.term:hover{transform:perspective(1000px) rotateY(0) rotateX(0)}
+.term-bar{display:flex;gap:7px;padding:12px 14px;border-bottom:1px solid #1e293b;align-items:center}
+.term-bar i{width:11px;height:11px;border-radius:50%;display:block}
+.term-bar span{margin-left:10px;font-size:.75rem;color:#64748b}
+.term pre{padding:18px;font-size:.8rem;line-height:1.7;color:#cbd5e1;min-height:310px;white-space:pre-wrap;word-break:break-word}
+.k{color:#22d3ee}.s{color:#34d399}.n{color:#f472b6}.c{color:#64748b}.y{color:#facc15}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:70px;position:relative;z-index:2}
+.stat{padding:22px;border:1px solid var(--line);border-radius:16px;background:var(--card);text-align:center}
+.stat b{display:block;font-size:2rem;font-weight:800;letter-spacing:-.02em}
+.stat span{color:var(--muted);font-size:.85rem}
+
+/* headings */
+.eyebrow{font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:600}
+h2{font-size:clamp(1.9rem,3.6vw,2.6rem);letter-spacing:-.03em;line-height:1.15;margin:10px 0 16px}
+.sub{color:var(--muted);max-width:620px;margin-bottom:50px}
+
+/* about */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start}
+.about p{color:var(--muted);margin-bottom:14px}
+.about p b{color:var(--text)}
+.facts{display:grid;gap:12px}
+.fact{display:flex;gap:14px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--card);transition:transform .25s,border-color .25s}
+.fact:hover{transform:translateX(6px);border-color:var(--accent)}
+.fact .ic{font-size:1.4rem}
+.fact small{color:var(--muted);display:block}
+
+/* skills */
+.skills{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.sk{padding:24px;border:1px solid var(--line);border-radius:18px;background:var(--card);position:relative;overflow:hidden}
+.sk::before{content:"";position:absolute;inset:0;background:radial-gradient(400px circle at var(--x,50%) var(--y,0%),rgba(34,211,238,.10),transparent 40%);opacity:0;transition:opacity .3s}
+.sk:hover::before{opacity:1}
+.sk h3{font-size:1rem;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{padding:6px 12px;border-radius:99px;font-size:.8rem;border:1px solid var(--line);background:var(--bg2);transition:all .2s;cursor:default}
+.chip:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+
+/* timeline */
+.tl{position:relative;padding-left:34px}
+.tl::before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--accent),var(--accent2),transparent)}
+.job{position:relative;padding:24px 26px;border:1px solid var(--line);border-radius:18px;background:var(--card);margin-bottom:22px}
+.job::before{content:"";position:absolute;left:-33px;top:30px;width:16px;height:16px;border-radius:50%;background:var(--bg);border:3px solid var(--accent)}
+.job-h{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
+.job h3{font-size:1.15rem}
+.job .org{color:var(--accent);font-weight:500;font-size:.95rem}
+.job .when{color:var(--muted);font-size:.85rem}
+.job ul{margin:14px 0 0 18px;color:var(--muted)}
+.job li{margin-bottom:6px}
+
+/* projects */
+.projects{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.proj{border:1px solid var(--line);border-radius:20px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;transition:transform .35s,box-shadow .35s,border-color .35s;transform-style:preserve-3d}
+.proj:hover{box-shadow:var(--shadow);border-color:color-mix(in srgb,var(--accent) 50%,var(--line))}
+.shot{height:190px;position:relative;overflow:hidden;background:linear-gradient(135deg,var(--h1),var(--h2));padding:18px}
+.shot .win{position:absolute;inset:22px 22px -10px 22px;background:rgba(10,15,28,.92);border-radius:12px 12px 0 0;padding:14px;font-size:.72rem;color:#cbd5e1;transition:transform .5s}
+.proj:hover .shot .win{transform:translateY(-8px)}
+.win .bar{display:flex;gap:5px;margin-bottom:10px}.win .bar i{width:8px;height:8px;border-radius:50%;background:#334155}
+.mini{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px}
+.mini div{background:#111a2e;border-radius:8px;padding:8px}
+.mini b{display:block;font-size:.9rem;color:#fff}
+.bars{display:flex;align-items:flex-end;gap:5px;height:46px}
+.bars span{flex:1;background:linear-gradient(var(--h1),var(--h2));border-radius:3px 3px 0 0;transform-origin:bottom;animation:grow 1.4s ease both}
+@keyframes grow{from{transform:scaleY(0)}}
+.proj-b{padding:24px;display:flex;flex-direction:column;gap:12px;flex:1}
+.proj h3{font-size:1.2rem}
+.proj p{color:var(--muted);font-size:.93rem}
+.proj ul{color:var(--muted);font-size:.88rem;margin-left:18px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.tag{font-size:.72rem;padding:4px 10px;border-radius:6px;background:var(--bg2);color:var(--accent);font-family:"JetBrains Mono",monospace}
+.plinks{display:flex;gap:16px;font-size:.88rem;font-weight:600}
+.plinks a{color:var(--accent)}
+.plinks a:hover{text-decoration:underline}
+.plinks span{color:var(--muted);font-weight:500}
+
+/* services */
+.services{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.svc{padding:26px 22px;border:1px solid var(--line);border-radius:18px;background:var(--card);transition:transform .3s,border-color .3s}
+.svc:hover{transform:translateY(-6px);border-color:var(--accent2)}
+.svc .ic{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;font-size:1.3rem;background:linear-gradient(135deg,rgba(34,211,238,.18),rgba(167,139,250,.18));margin-bottom:16px}
+.svc h3{font-size:1.02rem;margin-bottom:8px}
+.svc p{color:var(--muted);font-size:.88rem}
+
+/* contact */
+.contact{text-align:center;padding:60px 30px;border:1px solid var(--line);border-radius:28px;background:radial-gradient(600px circle at 50% 0%,rgba(34,211,238,.12),transparent 60%),var(--card)}
+.contact .sub{margin:0 auto 30px}
+.contact .cta{justify-content:center}
+footer{padding:40px 0;text-align:center;color:var(--muted);font-size:.85rem}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+
+@media (max-width:900px){
+  .hero-grid,.about{grid-template-columns:1fr}
+  .term{transform:none}
+  .skills,.projects{grid-template-columns:1fr}
+  .services,.stats{grid-template-columns:repeat(2,1fr)}
+  .links{position:fixed;top:68px;left:0;right:0;flex-direction:column;gap:0;background:var(--bg);border-bottom:1px solid var(--line);max-height:0;overflow:hidden;transition:max-height .35s}
+  .links.open{max-height:400px}
+  .links a{padding:14px 20px;border-top:1px solid var(--line)}
+  .links a.active::after{display:none}
+  .burger{display:grid}
+  section{padding:80px 0}
+}
+@media (max-width:520px){.services,.stats{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<div id="glow"></div>
+
+<nav id="nav">
+  <div class="wrap nav-in">
+    <a href="#top" class="logo">José<span>.</span>dev</a>
+    <div class="links" id="links">
+      <a href="#about" data-es="Sobre mí" data-en="About">Sobre mí</a>
+      <a href="#skills" data-es="Stack" data-en="Stack">Stack</a>
+      <a href="#experience" data-es="Experiencia" data-en="Experience">Experiencia</a>
+      <a href="#projects" data-es="Proyectos" data-en="Projects">Proyectos</a>
+      <a href="#services" data-es="Servicios" data-en="Services">Servicios</a>
+      <a href="#contact" data-es="Contacto" data-en="Contact">Contacto</a>
+    </div>
+    <div class="tools">
+      <button class="btn-ico" id="lang" aria-label="Cambiar idioma">EN</button>
+      <button class="btn-ico" id="theme" aria-label="Cambiar tema">☀️</button>
+      <button class="btn-ico burger" id="burger" aria-label="Menú">☰</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="blob b1"></div><div class="blob b2"></div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="badge reveal"><i class="dot"></i><span data-es="Disponible para proyectos freelance y part-time remotos" data-en="Available for remote freelance &amp; part-time work">Disponible para proyectos freelance y part-time remotos</span></span>
+        <h1 class="reveal d1"><span data-es="Hola, soy" data-en="Hi, I'm">Hola, soy</span><br><span class="grad">José Fernando Bolívar</span></h1>
+        <div class="role reveal d2"><span data-es="Ingeniero de Sistemas ·" data-en="Systems Engineer ·">Ingeniero de Sistemas ·</span> <b id="typed"></b><i class="caret"></i></div>
+        <p class="lead reveal d2" data-es="Construyo APIs REST seguras y sistemas en producción con Python, Django REST Framework, NestJS y PostgreSQL. También automatizo procesos de negocio: facturación, bots de WhatsApp y dashboards." data-en="I build secure REST APIs and production systems with Python, Django REST Framework, NestJS and PostgreSQL. I also automate business processes: billing, WhatsApp bots and dashboards.">Construyo APIs REST seguras y sistemas en producción con Python, Django REST Framework, NestJS y PostgreSQL. También automatizo procesos de negocio: facturación, bots de WhatsApp y dashboards.</p>
+        <div class="cta reveal d3">
+          <a href="#projects" class="btn primary"><span data-es="Ver proyectos" data-en="View projects">Ver proyectos</span> →</a>
+          <a href="#contact" class="btn ghost" data-es="Contáctame" data-en="Contact me">Contáctame</a>
+        </div>
+        <div class="socials reveal d3">
+          <a href="https://github.com/JFernandoBolivar" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.56-.29-5.25-1.28-5.25-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a10.9 10.9 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.7 5.38-5.27 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg></a>
+          <a href="https://www.linkedin.com/in/jos%C3%A9-fernando-bolivar-82600a348" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+          <a href="mailto:josefernandobolivar2@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
+        </div>
+      </div>
+      <div class="term reveal d2" aria-hidden="true">
+        <div class="term-bar"><i style="background:#ef4444"></i><i style="background:#f59e0b"></i><i style="background:#22c55e"></i><span class="mono">api — zsh</span></div>
+        <pre class="mono" id="term"></pre>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat reveal"><b class="grad" data-count="2" data-suffix="">0</b><span data-es="años en producción" data-en="years in production">años en producción</span></div>
+      <div class="stat reveal d1"><b class="grad" data-count="5" data-suffix="+">0</b><span data-es="sistemas entregados" data-en="systems delivered">sistemas entregados</span></div>
+      <div class="stat reveal d2"><b class="grad" data-count="20" data-suffix="/20">0</b><span data-es="nota de tesis" data-en="thesis grade">nota de tesis</span></div>
+      <div class="stat reveal d3"><b class="grad" data-count="3" data-suffix="">0</b><span data-es="monedas en facturación" data-en="currencies in billing">monedas en facturación</span></div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap about">
+    <div class="reveal">
+      <span class="eyebrow" data-es="Sobre mí" data-en="About me">Sobre mí</span>
+      <h2 data-es="Código limpio, datos seguros y sistemas que la gente usa todos los días." data-en="Clean code, secure data and systems people use every day.">Código limpio, datos seguros y sistemas que la gente usa todos los días.</h2>
+      <p data-es="Soy <b>Ingeniero de Sistemas</b> (UNEFA, Trabajo Especial de Grado aprobado con <b>20/20</b>) y desarrollador backend. Desde 2025 construyo y mantengo sistemas internos en producción para instituciones públicas: recursos humanos, nómina, beneficios y salud." data-en="I'm a <b>Systems Engineer</b> (UNEFA, thesis graded <b>20/20</b>) and backend developer. Since 2025 I've built and maintained production systems for public institutions: HR, payroll, benefits and health.">Soy <b>Ingeniero de Sistemas</b> (UNEFA, Trabajo Especial de Grado aprobado con <b>20/20</b>) y desarrollador backend. Desde 2025 construyo y mantengo sistemas internos en producción para instituciones públicas: recursos humanos, nómina, beneficios y salud.</p>
+      <p data-es="Me enfoco en <b>APIs REST bien diseñadas</b>, modelos de datos sólidos y seguridad (JWT, OAuth2, RBAC). Aprendo rápido: pasé de Django a NestJS y hoy exploro FastAPI, Go y Rust." data-en="I focus on <b>well-designed REST APIs</b>, solid data models and security (JWT, OAuth2, RBAC). I learn fast: I moved from Django to NestJS and I'm now exploring FastAPI, Go and Rust.">Me enfoco en <b>APIs REST bien diseñadas</b>, modelos de datos sólidos y seguridad (JWT, OAuth2, RBAC). Aprendo rápido: pasé de Django a NestJS y hoy exploro FastAPI, Go y Rust.</p>
+    </div>
+    <div class="facts">
+      <div class="fact reveal d1"><span class="ic">🎓</span><div><b data-es="Ingeniería de Sistemas" data-en="Systems Engineering">Ingeniería de Sistemas</b><small data-es="UNEFA · 2021 – 2026 · Tesis 20/20" data-en="UNEFA · 2021 – 2026 · Thesis 20/20">UNEFA · 2021 – 2026 · Tesis 20/20</small></div></div>
+      <div class="fact reveal d2"><span class="ic">🛡️</span><div><b data-es="Seguridad primero" data-en="Security first">Seguridad primero</b><small data-es="JWT, OAuth2 y RBAC en sistemas con datos sensibles" data-en="JWT, OAuth2 and RBAC in systems with sensitive data">JWT, OAuth2 y RBAC en sistemas con datos sensibles</small></div></div>
+      <div class="fact reveal d3"><span class="ic">🌎</span><div><b data-es="Remoto · UTC-4" data-en="Remote · UTC-4">Remoto · UTC-4</b><small data-es="Español nativo · inglés técnico · trabajo asíncrono" data-en="Native Spanish · technical English · async-friendly">Español nativo · inglés técnico · trabajo asíncrono</small></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <span class="eyebrow reveal">Stack</span>
+    <h2 class="reveal" data-es="Herramientas con las que construyo" data-en="Tools I build with">Herramientas con las que construyo</h2>
+    <p class="sub reveal" data-es="Backend como especialidad, con base sólida en bases de datos, seguridad y frontend." data-en="Backend as my specialty, with a solid base in databases, security and frontend.">Backend como especialidad, con base sólida en bases de datos, seguridad y frontend.</p>
+    <div class="skills">
+      <div class="sk reveal"><h3>⚙️ Backend</h3><div class="chips"><span class="chip">Python</span><span class="chip">Django</span><span class="chip">Django REST Framework</span><span class="chip">NestJS</span><span class="chip">Node.js</span><span class="chip">Flask</span><span class="chip">TypeScript</span></div></div>
+      <div class="sk reveal d1"><h3>🗄️ <span data-es="Datos" data-en="Data">Datos</span></h3><div class="chips"><span class="chip">PostgreSQL</span><span class="chip">MySQL</span><span class="chip">SQL</span><span class="chip">Prisma</span><span class="chip" data-es="Modelado relacional" data-en="Relational modeling">Modelado relacional</span></div></div>
+      <div class="sk reveal d2"><h3>🔐 <span data-es="Seguridad y APIs" data-en="Security &amp; APIs">Seguridad y APIs</span></h3><div class="chips"><span class="chip">REST</span><span class="chip">JWT</span><span class="chip">OAuth2</span><span class="chip">RBAC</span><span class="chip">Swagger / OpenAPI</span></div></div>
+      <div class="sk reveal"><h3>🚀 DevOps</h3><div class="chips"><span class="chip">Git</span><span class="chip">GitHub</span><span class="chip">Docker</span><span class="chip">Vercel</span><span class="chip" data-es="AWS (básico)" data-en="AWS (basic)">AWS (básico)</span></div></div>
+      <div class="sk reveal d1"><h3>🎨 Frontend</h3><div class="chips"><span class="chip">JavaScript</span><span class="chip">React</span><span class="chip">Next.js</span><span class="chip">HTML</span><span class="chip">CSS</span></div></div>
+      <div class="sk reveal d2"><h3>📊 <span data-es="Automatización" data-en="Automation">Automatización</span></h3><div class="chips"><span class="chip">Excel</span><span class="chip">Google Sheets</span><span class="chip">Apps Script</span><span class="chip" data-es="Bots de WhatsApp" data-en="WhatsApp bots">Bots de WhatsApp</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <span class="eyebrow reveal" data-es="Experiencia" data-en="Experience">Experiencia</span>
+    <h2 class="reveal" data-es="Sistemas reales, usuarios reales" data-en="Real systems, real users">Sistemas reales, usuarios reales</h2>
+    <p class="sub reveal" data-es="Desarrollo de software en el sector público venezolano." data-en="Software development in Venezuela's public sector.">Desarrollo de software en el sector público venezolano.</p>
+    <div class="tl">
+      <div class="job reveal">
+        <div class="job-h"><h3 data-es="Programador Backend" data-en="Backend Developer">Programador Backend</h3><span class="when" data-es="abr. 2026 – actualidad" data-en="Apr 2026 – Present">abr. 2026 – actualidad</span></div>
+        <div class="org" data-es="Organismo público del sector telecomunicaciones · Caracas" data-en="Public telecommunications agency · Caracas">Organismo público del sector telecomunicaciones · Caracas</div>
+        <ul>
+          <li data-es="Desarrollo sistemas de información a la medida que digitalizan procesos internos que antes eran manuales." data-en="Build custom information systems that digitize internal processes that used to be manual.">Desarrollo sistemas de información a la medida que digitalizan procesos internos que antes eran manuales.</li>
+          <li data-es="Levanto requerimientos con las unidades usuarias, diseño el modelo de datos e implemento las APIs REST de cada módulo." data-en="Gather requirements with users, design the data model and implement each module's REST APIs.">Levanto requerimientos con las unidades usuarias, diseño el modelo de datos e implemento las APIs REST de cada módulo.</li>
+          <li data-es="Autenticación y control de acceso por roles (RBAC) para proteger información sensible." data-en="Authentication and role-based access control (RBAC) to protect sensitive data.">Autenticación y control de acceso por roles (RBAC) para proteger información sensible.</li>
+        </ul>
+      </div>
+      <div class="job reveal">
+        <div class="job-h"><h3>Backend Developer (Full Stack)</h3><span class="when" data-es="feb. 2025 – abr. 2026" data-en="Feb 2025 – Apr 2026">feb. 2025 – abr. 2026</span></div>
+        <div class="org" data-es="Institución pública del sector justicia · Caracas" data-en="Public justice-sector institution · Caracas">Institución pública del sector justicia · Caracas</div>
+        <ul>
+          <li data-es="Sistema de gestión de beneficios para personal activo, jubilados y pensionados que reemplazó el control manual en Excel." data-en="Benefits management system for active and retired staff that replaced manual Excel tracking.">Sistema de gestión de beneficios para personal activo, jubilados y pensionados que reemplazó el control manual en Excel.</li>
+          <li data-es="Gestión de personal y cargos, reportes dinámicos con filtros combinables y módulo de servicio médico." data-en="Personnel and positions management, dynamic reports with combinable filters and a medical service module.">Gestión de personal y cargos, reportes dinámicos con filtros combinables y módulo de servicio médico.</li>
+          <li data-es="APIs REST con Django REST Framework y NestJS documentadas con Swagger; PostgreSQL; JWT y RBAC." data-en="REST APIs with Django REST Framework and NestJS documented with Swagger; PostgreSQL; JWT and RBAC.">APIs REST con Django REST Framework y NestJS documentadas con Swagger; PostgreSQL; JWT y RBAC.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <span class="eyebrow reveal" data-es="Proyectos" data-en="Projects">Proyectos</span>
+    <h2 class="reveal" data-es="Trabajo destacado" data-en="Featured work">Trabajo destacado</h2>
+    <p class="sub reveal" data-es="Una selección de sistemas que muestran cómo pienso: problema, solución y resultado." data-en="A selection of systems that show how I think: problem, solution and result.">Una selección de sistemas que muestran cómo pienso: problema, solución y resultado.</p>
+    <div class="projects">
+      <article class="proj reveal tilt">
+        <div class="shot" style="--h1:#06b6d4;--h2:#6366f1"><div class="win"><div class="bar"><i></i><i></i><i></i></div>
+          <div class="mini"><div>VES<b>Bs 48.2k</b></div><div>USD<b>$ 1,320</b></div><div>EUR<b>€ 1,210</b></div></div>
+          <div class="bars"><span style="height:40%"></span><span style="height:65%"></span><span style="height:52%"></span><span style="height:80%"></span><span style="height:70%"></span><span style="height:95%"></span><span style="height:85%"></span></div></div></div>
+        <div class="proj-b">
+          <h3 data-es="Inventario y facturación multimoneda" data-en="Multi-currency inventory &amp; billing">Inventario y facturación multimoneda</h3>
+          <p data-es="Ventas, inventario y facturación en bolívares, dólares y euros con conversión de tasas para comercios venezolanos." data-en="Sales, inventory and invoicing in VES, USD and EUR with exchange-rate conversion for Venezuelan businesses.">Ventas, inventario y facturación en bolívares, dólares y euros con conversión de tasas para comercios venezolanos.</p>
+          <ul><li data-es="Cuentas por cobrar: crédito, abonos parciales e historial por cliente" data-en="Accounts receivable: credit, partial payments and per-customer history">Cuentas por cobrar: crédito, abonos parciales e historial por cliente</li><li data-es="Roles Administrador, Supervisor y Vendedor con JWT" data-en="Admin, Supervisor and Seller roles with JWT">Roles Administrador, Supervisor y Vendedor con JWT</li></ul>
+          <div class="tags"><span class="tag">Django</span><span class="tag">DRF</span><span class="tag">PostgreSQL</span><span class="tag">JWT</span></div>
+          <div class="plinks"><span data-es="🔒 Código privado · demo bajo solicitud" data-en="🔒 Private code · demo on request">🔒 Código privado · demo bajo solicitud</span></div>
+        </div>
+      </article>
+      <article class="proj reveal d1 tilt">
+        <div class="shot" style="--h1:#8b5cf6;--h2:#ec4899"><div class="win"><div class="bar"><i></i><i></i><i></i></div>
+<span class="c"># GET /api/beneficios?estado=jubilado</span>
+<br><span class="k">{</span> <span class="s">"count"</span>: <span class="n">1248</span>, <span class="s">"results"</span>: [
+<br>&nbsp;&nbsp;<span class="k">{</span> <span class="s">"cargo"</span>: <span class="y">"Analista"</span>, <span class="s">"beneficio"</span>: <span class="y">"Útiles"</span> <span class="k">}</span>
+<br>] <span class="k">}</span></div></div>
+        <div class="proj-b">
+          <h3 data-es="Gestión de personal y beneficios" data-en="HR &amp; benefits management">Gestión de personal y beneficios</h3>
+          <p data-es="Sistema institucional en producción que reemplazó hojas de Excel por un flujo trazable para personal activo, jubilado y pensionado." data-en="Production system that replaced Excel sheets with a traceable workflow for active, retired and pensioned staff.">Sistema institucional en producción que reemplazó hojas de Excel por un flujo trazable para personal activo, jubilado y pensionado.</p>
+          <ul><li data-es="Reportes dinámicos con filtros combinables" data-en="Dynamic reports with combinable filters">Reportes dinámicos con filtros combinables</li><li data-es="Limpieza de datos heredados: menos duplicados e inconsistencias" data-en="Legacy data cleanup: fewer duplicates and inconsistencies">Limpieza de datos heredados: menos duplicados e inconsistencias</li></ul>
+          <div class="tags"><span class="tag">DRF</span><span class="tag">NestJS</span><span class="tag">PostgreSQL</span><span class="tag">RBAC</span><span class="tag">Swagger</span></div>
+          <div class="plinks"><span data-es="🏛️ Proyecto institucional · código confidencial" data-en="🏛️ Institutional project · confidential code">🏛️ Proyecto institucional · código confidencial</span></div>
+        </div>
+      </article>
+      <article class="proj reveal tilt">
+        <div class="shot" style="--h1:#10b981;--h2:#06b6d4"><div class="win"><div class="bar"><i></i><i></i><i></i></div>
+          <div class="mini"><div><span data-es="Admin" data-en="Admin">Admin</span><b>4</b></div><div><span data-es="Profesores" data-en="Professors">Profesores</span><b>32</b></div><div><span data-es="Entregas" data-en="Submissions">Entregas</span><b>418</b></div></div>
+          <div class="bars"><span style="height:55%"></span><span style="height:75%"></span><span style="height:60%"></span><span style="height:90%"></span><span style="height:45%"></span><span style="height:70%"></span></div></div></div>
+        <div class="proj-b">
+          <h3 data-es="Sistema de gestión académica (tesis 20/20)" data-en="Academic management system (thesis 20/20)">Sistema de gestión académica (tesis 20/20)</h3>
+          <p data-es="Mi Trabajo Especial de Grado: plataforma para gestionar proyectos académicos, evaluaciones y entregas con fecha límite." data-en="My final-year thesis: a platform to manage academic projects, grading and deadline-based submissions.">Mi Trabajo Especial de Grado: plataforma para gestionar proyectos académicos, evaluaciones y entregas con fecha límite.</p>
+          <ul><li data-es="4 roles: Administrador, Coordinador, Profesor y Estudiante" data-en="4 roles: Admin, Coordinator, Professor and Student">4 roles: Administrador, Coordinador, Profesor y Estudiante</li><li data-es="Calificaciones, retroalimentación y control de entregas" data-en="Grades, feedback and submission tracking">Calificaciones, retroalimentación y control de entregas</li></ul>
+          <div class="tags"><span class="tag">TypeScript</span><span class="tag">NestJS</span><span class="tag">PostgreSQL</span></div>
+          <div class="plinks"><a href="https://github.com/JFernandoBolivar/sistema-tesis" target="_blank" rel="noopener" data-es="Ver código →" data-en="View code →">Ver código →</a></div>
+        </div>
+      </article>
+      <article class="proj reveal d1 tilt">
+        <div class="shot" style="--h1:#f59e0b;--h2:#ef4444"><div class="win"><div class="bar"><i></i><i></i><i></i></div>
+<span class="c"># POST /api/paquetes/12/reviews</span>
+<br><span class="k">{</span> <span class="s">"rating"</span>: <span class="n">5</span>, <span class="s">"comment"</span>: <span class="y">"Excelente viaje"</span> <span class="k">}</span>
+<br><span class="c"># 201 Created</span>
+<br><span class="k">{</span> <span class="s">"id"</span>: <span class="n">87</span>, <span class="s">"avg_rating"</span>: <span class="n">4.8</span> <span class="k">}</span></div></div>
+        <div class="proj-b">
+          <h3 data-es="API para agencia de viajes" data-en="Travel agency API">API para agencia de viajes</h3>
+          <p data-es="Backend para catálogo de paquetes turísticos: disponibilidad, precios, fechas, duración y tipos de paquete." data-en="Backend for a tour package catalog: availability, pricing, dates, duration and package types.">Backend para catálogo de paquetes turísticos: disponibilidad, precios, fechas, duración y tipos de paquete.</p>
+          <ul><li data-es="Reseñas y valoraciones con validaciones de integridad" data-en="Reviews and ratings with integrity validations">Reseñas y valoraciones con validaciones de integridad</li><li data-es="Relaciones usuario–reseña–paquete bien modeladas" data-en="Well-modeled user–review–package relations">Relaciones usuario–reseña–paquete bien modeladas</li></ul>
+          <div class="tags"><span class="tag">Python</span><span class="tag">Flask</span><span class="tag">SQL</span></div>
+          <div class="plinks"><a href="https://github.com/JFernandoBolivar/AgenciaViajes" target="_blank" rel="noopener" data-es="Ver código →" data-en="View code →">Ver código →</a></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <span class="eyebrow reveal" data-es="Servicios" data-en="Services">Servicios</span>
+    <h2 class="reveal" data-es="¿En qué te puedo ayudar?" data-en="How can I help?">¿En qué te puedo ayudar?</h2>
+    <p class="sub reveal" data-es="Proyectos freelance y part-time, trabajo asíncrono y entregas claras." data-en="Freelance and part-time projects, async work and clear deliveries.">Proyectos freelance y part-time, trabajo asíncrono y entregas claras.</p>
+    <div class="services">
+      <div class="svc reveal"><div class="ic">🔌</div><h3 data-es="APIs REST y backend" data-en="REST APIs &amp; backend">APIs REST y backend</h3><p data-es="Diseño e implementación de APIs seguras con Django, DRF o NestJS." data-en="Design and build secure APIs with Django, DRF or NestJS.">Diseño e implementación de APIs seguras con Django, DRF o NestJS.</p></div>
+      <div class="svc reveal d1"><div class="ic">🧾</div><h3 data-es="Sistemas de gestión" data-en="Business systems">Sistemas de gestión</h3><p data-es="Facturación multimoneda, inventario, personal y reportes a la medida." data-en="Multi-currency billing, inventory, HR and custom reports.">Facturación multimoneda, inventario, personal y reportes a la medida.</p></div>
+      <div class="svc reveal d2"><div class="ic">🤖</div><h3 data-es="Automatización y bots" data-en="Automation &amp; bots">Automatización y bots</h3><p data-es="Bots de WhatsApp, integraciones y tareas automáticas para tu negocio." data-en="WhatsApp bots, integrations and automated tasks for your business.">Bots de WhatsApp, integraciones y tareas automáticas para tu negocio.</p></div>
+      <div class="svc reveal d3"><div class="ic">📈</div><h3 data-es="Dashboards de datos" data-en="Data dashboards">Dashboards de datos</h3><p data-es="Excel y Google Sheets con fórmulas, gráficos automáticos y Apps Script." data-en="Excel and Google Sheets with formulas, automatic charts and Apps Script.">Excel y Google Sheets con fórmulas, gráficos automáticos y Apps Script.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact reveal">
+      <span class="eyebrow" data-es="Contacto" data-en="Contact">Contacto</span>
+      <h2 data-es="¿Tienes un proyecto en mente?" data-en="Have a project in mind?">¿Tienes un proyecto en mente?</h2>
+      <p class="sub" data-es="Escríbeme y te respondo en menos de 24 horas con una propuesta clara." data-en="Message me and I'll reply within 24 hours with a clear proposal.">Escríbeme y te respondo en menos de 24 horas con una propuesta clara.</p>
+      <div class="cta">
+        <a class="btn primary" href="mailto:josefernandobolivar2@gmail.com">✉️ josefernandobolivar2@gmail.com</a>
+        <a class="btn ghost" href="https://www.linkedin.com/in/jos%C3%A9-fernando-bolivar-82600a348" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn ghost" href="https://github.com/JFernandoBolivar" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap">© <span id="yr"></span> José Fernando Bolívar · <span data-es="Hecho con HTML, CSS y JavaScript" data-en="Built with HTML, CSS and JavaScript">Hecho con HTML, CSS y JavaScript</span></div></footer>
+
+<script>
+(() => {
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const store = { get(k){try{return localStorage.getItem(k)}catch(e){return null}}, set(k,v){try{localStorage.setItem(k,v)}catch(e){}} };
+  $('#yr').textContent = new Date().getFullYear();
+
+  // theme
+  const root = document.documentElement;
+  const setTheme = t => { root.dataset.theme = t; $('#theme').textContent = t === 'dark' ? '☀️' : '🌙'; store.set('theme', t); };
+  setTheme(store.get('theme') || 'dark');
+  $('#theme').onclick = () => setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
+
+  // language
+  let lang = store.get('lang') || (navigator.language.startsWith('es') ? 'es' : 'en');
+  const roles = { es:['Desarrollador Backend','APIs REST con Django y NestJS','Automatización de procesos','PostgreSQL y modelado de datos'],
+                  en:['Backend Developer','REST APIs with Django & NestJS','Process automation','PostgreSQL & data modeling'] };
+  const setLang = l => { lang = l; root.lang = l; $$('[data-es]').forEach(el => el.innerHTML = el.dataset[l]); $('#lang').textContent = l === 'es' ? 'EN' : 'ES'; store.set('lang', l); };
+  setLang(lang);
+  $('#lang').onclick = () => setLang(lang === 'es' ? 'en' : 'es');
+
+  // typing effect
+  const typed = $('#typed'); let ri = 0, ci = 0, del = false;
+  const tick = () => {
+    const word = roles[lang][ri % roles[lang].length];
+    typed.textContent = word.slice(0, ci);
+    if (!del && ci < word.length) ci++; else if (del && ci > 0) ci--; else { del = !del; if (!del) ri++; }
+    setTimeout(tick, del ? 35 : (ci === word.length ? 1600 : 70));
+  };
+  if (reduce) typed.textContent = roles[lang][0]; else tick();
+
+  // terminal animation
+  const lines = [
+    ['<span class="c">$</span> curl -X POST /api/auth/login', 0],
+    ['<span class="k">{</span> <span class="s">"access"</span>: <span class="y">"eyJhbGciOi..."</span>, <span class="s">"role"</span>: <span class="y">"admin"</span> <span class="k">}</span>', 500],
+    ['', 200],
+    ['<span class="c">$</span> curl /api/facturas?moneda=USD -H "Authorization: Bearer ..."', 700],
+    ['<span class="k">{</span>', 400],
+    ['  <span class="s">"count"</span>: <span class="n">342</span>,', 120],
+    ['  <span class="s">"total_usd"</span>: <span class="n">18450.75</span>,', 120],
+    ['  <span class="s">"total_ves"</span>: <span class="n">671602.30</span>,', 120],
+    ['  <span class="s">"status"</span>: <span class="y">"ok"</span>', 120],
+    ['<span class="k">}</span>', 120],
+    ['', 200],
+    ['<span class="c"># 200 OK · 38 ms · JWT + RBAC ✔</span>', 600],
+  ];
+  const term = $('#term');
+  const runTerm = async () => {
+    term.innerHTML = '';
+    for (const [l, d] of lines) { await new Promise(r => setTimeout(r, reduce ? 0 : d)); term.innerHTML += l + '\n'; }
+    if (!reduce) setTimeout(runTerm, 6000);
+  };
+  runTerm();
+
+  // reveal + counters
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('in'); io.unobserve(e.target);
+    e.target.querySelectorAll('[data-count]').forEach(c => {
+      const end = +c.dataset.count, suf = c.dataset.suffix || ''; let t0 = null;
+      const step = ts => { t0 ??= ts; const p = Math.min((ts - t0) / 1200, 1); c.textContent = Math.round(end * (1 - Math.pow(1 - p, 3))) + suf; if (p < 1) requestAnimationFrame(step); };
+      reduce ? c.textContent = end + suf : requestAnimationFrame(step);
+    });
+  }), { threshold: .15 });
+  $$('.reveal').forEach(el => io.observe(el));
+
+  // nav: scrolled, progress, active link
+  const secs = $$('section[id]'), navLinks = $$('#links a');
+  const onScroll = () => {
+    const y = scrollY, h = document.documentElement.scrollHeight - innerHeight;
+    $('#nav').classList.toggle('scrolled', y > 20);
+    $('#progress').style.width = (y / h * 100) + '%';
+    let cur = ''; secs.forEach(s => { if (y >= s.offsetTop - 140) cur = s.id; });
+    navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
+  };
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  $('#burger').onclick = () => $('#links').classList.toggle('open');
+  navLinks.forEach(a => a.onclick = () => $('#links').classList.remove('open'));
+
+  // cursor glow + card spotlight + tilt (desktop only)
+  if (!reduce && matchMedia('(pointer:fine)').matches) {
+    const glow = $('#glow');
+    addEventListener('mousemove', e => { glow.style.left = e.clientX + 'px'; glow.style.top = e.clientY + 'px'; });
+    $$('.sk').forEach(c => c.addEventListener('mousemove', e => { const r = c.getBoundingClientRect(); c.style.setProperty('--x', (e.clientX - r.left) + 'px'); c.style.setProperty('--y', (e.clientY - r.top) + 'px'); }));
+    $$('.tilt').forEach(c => {
+      c.addEventListener('mousemove', e => { const r = c.getBoundingClientRect(); const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; c.style.transform = `perspective(900px) rotateY(${x * 6}deg) rotateX(${-y * 6}deg) translateY(-4px)`; });
+      c.addEventListener('mouseleave', () => c.style.transform = '');
+    });
+  } else { $('#glow').style.display = 'none'; }
+})();
+</script>
+</body>
+</html>
