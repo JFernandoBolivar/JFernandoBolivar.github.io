@@ -198,6 +198,7 @@ footer{padding:40px 0;text-align:center;color:var(--muted);font-size:.85rem}
 
 
 /* phoenix companion */
+#embers{position:fixed;inset:0;width:100%;height:100%;z-index:39;pointer-events:none}
 #phx{position:fixed;left:0;top:0;width:150px;height:auto;z-index:40;pointer-events:none;opacity:0;transition:opacity .8s;will-change:transform;filter:drop-shadow(0 0 18px rgba(34,211,238,.25))}
 #phx.on{opacity:.92}
 [data-theme="light"] #phx{filter:drop-shadow(0 0 10px rgba(124,58,237,.25))}
@@ -228,6 +229,7 @@ footer{padding:40px 0;text-align:center;color:var(--muted);font-size:.85rem}
 <body>
 <div id="progress"></div>
 <div id="glow"></div>
+<canvas id="embers" aria-hidden="true"></canvas>
 <svg id="phx" viewBox="-140 -95 200 155" aria-hidden="true"><defs>
 <linearGradient id="tailS" x1="0" y1="0" x2="1" y2="0" gradientUnits="objectBoundingBox">
   <stop offset="0" stop-color="#f59e0b" stop-opacity="0"/><stop offset=".35" stop-color="#f59e0b" stop-opacity=".55"/><stop offset=".7" stop-color="#a78bfa" stop-opacity=".85"/><stop offset="1" stop-color="#22d3ee"/></linearGradient>
@@ -235,8 +237,24 @@ footer{padding:40px 0;text-align:center;color:var(--muted);font-size:.85rem}
   <stop offset="0" stop-color="#22d3ee" stop-opacity=".45"/><stop offset=".6" stop-color="#a78bfa" stop-opacity=".25"/><stop offset="1" stop-color="#f59e0b" stop-opacity=".35"/></linearGradient>
 <linearGradient id="wingbS" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#a78bfa" stop-opacity=".3"/><stop offset="1" stop-color="#a78bfa" stop-opacity=".05"/></linearGradient>
 <linearGradient id="bodyS" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#a78bfa"/><stop offset="1" stop-color="#22d3ee"/></linearGradient>
+<linearGradient id="firegS" x1="0" y1="0" x2="1" y2="0" gradientUnits="objectBoundingBox">
+  <stop offset="0" stop-color="#dc2626" stop-opacity="0"/><stop offset=".4" stop-color="#f97316" stop-opacity=".7"/><stop offset=".8" stop-color="#fbbf24" stop-opacity=".9"/><stop offset="1" stop-color="#fde68a"/></linearGradient>
+<radialGradient id="coreS"><stop offset="0" stop-color="#fbbf24" stop-opacity=".55"/><stop offset=".5" stop-color="#f97316" stop-opacity=".25"/><stop offset="1" stop-color="#dc2626" stop-opacity="0"/></radialGradient>
+<filter id="fireS" x="-60%" y="-60%" width="220%" height="220%">
+  <feTurbulence type="fractalNoise" baseFrequency="0.035 0.09" numOctaves="2" seed="3" result="n">
+    <animate attributeName="baseFrequency" dur="1.6s" repeatCount="indefinite" values="0.035 0.09;0.045 0.12;0.035 0.09"/></feTurbulence>
+  <feDisplacementMap in="SourceGraphic" in2="n" scale="9" xChannelSelector="R" yChannelSelector="G" result="d"/>
+  <feGaussianBlur in="d" stdDeviation="1.6" result="b"/>
+  <feMerge><feMergeNode in="b"/><feMergeNode in="d"/></feMerge></filter>
 <filter id="glowS" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
 <g transform="scale(1.0)">
+  <ellipse cx="14" cy="-2" rx="34" ry="18" fill="url(#coreS)">
+    <animate attributeName="rx" dur="0.9s" repeatCount="indefinite" values="32;38;32"/><animate attributeName="opacity" dur="0.7s" repeatCount="indefinite" values=".8;1;.8"/></ellipse>
+  <g fill="none" stroke="url(#firegS)" stroke-linecap="round" filter="url(#fireS)" opacity=".85">
+    <path d="M-2 1 C-30 6 -58 22 -96 18" stroke-width="7"/>
+    <path d="M-2 0 C-40 -2 -80 -6 -122 -14" stroke-width="5"/>
+    <path d="M-2 4 C-28 18 -50 38 -82 48" stroke-width="5"/>
+  </g>
   <g fill="none" stroke="url(#tailS)" stroke-linecap="round" filter="url(#glowS)"><path d="M-4 2 C-34 6 -62 22 -96 18 C-108 16 -112 6 -104 2" stroke-width="2.2"><animate attributeName="d" dur="1.9s" repeatCount="indefinite" values="M-4 2 C-34 6 -62 22 -96 18 C-108 16 -112 6 -104 2;M-4 2 C-34 12 -64 14 -98 24 C-110 26 -116 16 -108 10;M-4 2 C-34 6 -62 22 -96 18 C-108 16 -112 6 -104 2" calcMode="spline" keyTimes="0;.5;1" keySplines=".4 0 .6 1;.4 0 .6 1"/></path><path d="M-4 0 C-40 -2 -76 -6 -118 -16 C-128 -18 -132 -10 -124 -6" stroke-width="1.8"><animate attributeName="d" dur="2.3s" repeatCount="indefinite" values="M-4 0 C-40 -2 -76 -6 -118 -16 C-128 -18 -132 -10 -124 -6;M-4 0 C-40 4 -78 -12 -120 -8 C-130 -6 -132 2 -124 4;M-4 0 C-40 -2 -76 -6 -118 -16 C-128 -18 -132 -10 -124 -6" calcMode="spline" keyTimes="0;.5;1" keySplines=".4 0 .6 1;.4 0 .6 1"/></path><path d="M-4 4 C-28 18 -48 40 -80 50 C-90 52 -94 44 -88 40" stroke-width="1.6"><animate attributeName="d" dur="1.7s" repeatCount="indefinite" values="M-4 4 C-28 18 -48 40 -80 50 C-90 52 -94 44 -88 40;M-4 4 C-30 22 -54 34 -84 44 C-94 46 -96 38 -90 34;M-4 4 C-28 18 -48 40 -80 50 C-90 52 -94 44 -88 40" calcMode="spline" keyTimes="0;.5;1" keySplines=".4 0 .6 1;.4 0 .6 1"/></path><path d="M-4 1 C-36 10 -70 34 -104 36" stroke-width="1.2"><animate attributeName="d" dur="2.0s" repeatCount="indefinite" values="M-4 1 C-36 10 -70 34 -104 36;M-4 1 C-36 16 -72 26 -106 42;M-4 1 C-36 10 -70 34 -104 36" calcMode="spline" keyTimes="0;.5;1" keySplines=".4 0 .6 1;.4 0 .6 1"/></path></g>
   <g transform="translate(12,-4)"><g fill="url(#wingbS)" stroke="#a78bfa" stroke-opacity=".7" stroke-width=".8" opacity=".6"><path d="M0 0 Q2.7 -19.0 -12.0 -39.1 Q-7.4 -21.4 0 0Z"/><path d="M0 0 Q-3.5 -24.8 -24.9 -48.2 Q-14.5 -26.2 0 0Z"/><path d="M0 0 Q-10.8 -26.7 -39.1 -49.0 Q-22.2 -26.5 0 0Z"/><path d="M0 0 Q-16.3 -24.1 -49.0 -40.4 Q-27.6 -21.6 0 0Z"/><path d="M0 0 Q-18.3 -18.5 -50.4 -25.6 Q-28.2 -13.3 0 0Z"/><path d="M0 0 Q-16.4 -12.3 -42.6 -10.2 Q-23.7 -4.8 0 0Z"/>
     <animateTransform attributeName="transform" type="rotate" dur="1.15s" repeatCount="indefinite" values="8;-34;8" calcMode="spline" keyTimes="0;.5;1" keySplines=".4 0 .6 1;.4 0 .6 1" begin="-0.15s"/></g></g>
@@ -246,7 +264,7 @@ footer{padding:40px 0;text-align:center;color:var(--muted);font-size:.85rem}
   <circle cx="42.5" cy="-13.2" r="1.1" fill="#f8fafc"/>
   <g transform="translate(14,-5)"><g fill="url(#wingS)" stroke="url(#bodyS)" stroke-width="1" filter="url(#glowS)"><path d="M0 0 Q5.0 -22.8 -10.3 -48.9 Q-6.6 -26.8 0 0Z"/><path d="M0 0 Q-2.0 -30.2 -25.1 -60.8 Q-14.6 -33.2 0 0Z"/><path d="M0 0 Q-10.9 -33.7 -43.0 -64.3 Q-24.4 -34.9 0 0Z"/><path d="M0 0 Q-19.2 -32.3 -58.8 -57.4 Q-33.0 -31.0 0 0Z"/><path d="M0 0 Q-24.5 -26.7 -67.2 -41.9 Q-37.5 -22.3 0 0Z"/><path d="M0 0 Q-25.4 -19.1 -65.2 -22.7 Q-36.2 -11.7 0 0Z"/><path d="M0 0 Q-22.2 -11.9 -53.7 -5.3 Q-29.7 -2.0 0 0Z"/>
     <animateTransform attributeName="transform" type="rotate" dur="1.15s" repeatCount="indefinite" values="10;-40;10" calcMode="spline" keyTimes="0;.5;1" keySplines=".4 0 .6 1;.4 0 .6 1"/></g></g>
-  <g>
+  <g><circle r="1.2" fill="#fbbf24"><animate attributeName="cx" dur="1.18s" begin="0.8s" repeatCount="indefinite" values="-20;-69"/><animate attributeName="cy" dur="1.18s" begin="0.8s" repeatCount="indefinite" values="6;-17"/><animate attributeName="opacity" dur="1.18s" begin="0.8s" repeatCount="indefinite" values="0;1;0"/></circle><circle r="0.9" fill="#ef4444"><animate attributeName="cx" dur="1.58s" begin="0.1s" repeatCount="indefinite" values="-8;-61"/><animate attributeName="cy" dur="1.58s" begin="0.1s" repeatCount="indefinite" values="-5;-30"/><animate attributeName="opacity" dur="1.58s" begin="0.1s" repeatCount="indefinite" values="0;1;0"/></circle><circle r="0.9" fill="#fde68a"><animate attributeName="cx" dur="1.79s" begin="0.87s" repeatCount="indefinite" values="-37;-113"/><animate attributeName="cy" dur="1.79s" begin="0.87s" repeatCount="indefinite" values="-3;-37"/><animate attributeName="opacity" dur="1.79s" begin="0.87s" repeatCount="indefinite" values="0;1;0"/></circle><circle r="1.3" fill="#fde68a"><animate attributeName="cx" dur="1.71s" begin="0.2s" repeatCount="indefinite" values="-15;-58"/><animate attributeName="cy" dur="1.71s" begin="0.2s" repeatCount="indefinite" values="1;-21"/><animate attributeName="opacity" dur="1.71s" begin="0.2s" repeatCount="indefinite" values="0;1;0"/></circle><circle r="1.4" fill="#f97316"><animate attributeName="cx" dur="2.0s" begin="0.27s" repeatCount="indefinite" values="-33;-109"/><animate attributeName="cy" dur="2.0s" begin="0.27s" repeatCount="indefinite" values="3;-52"/><animate attributeName="opacity" dur="2.0s" begin="0.27s" repeatCount="indefinite" values="0;1;0"/></circle><circle r="1.3" fill="#fde68a"><animate attributeName="cx" dur="1.72s" begin="0.93s" repeatCount="indefinite" values="-17;-63"/><animate attributeName="cy" dur="1.72s" begin="0.93s" repeatCount="indefinite" values="11;-13"/><animate attributeName="opacity" dur="1.72s" begin="0.93s" repeatCount="indefinite" values="0;1;0"/></circle><circle r="1.1" fill="#f97316"><animate attributeName="cx" dur="1.74s" begin="0.68s" repeatCount="indefinite" values="-13;-102"/><animate attributeName="cy" dur="1.74s" begin="0.68s" repeatCount="indefinite" values="4;-45"/><animate attributeName="opacity" dur="1.74s" begin="0.68s" repeatCount="indefinite" values="0;1;0"/></circle><circle r="1.6" fill="#f97316"><animate attributeName="cx" dur="1.68s" begin="1.31s" repeatCount="indefinite" values="-25;-70"/><animate attributeName="cy" dur="1.68s" begin="1.31s" repeatCount="indefinite" values="12;-27"/><animate attributeName="opacity" dur="1.68s" begin="1.31s" repeatCount="indefinite" values="0;1;0"/></circle><circle r="1.0" fill="#ef4444"><animate attributeName="cx" dur="1.56s" begin="1.14s" repeatCount="indefinite" values="-2;-46"/><animate attributeName="cy" dur="1.56s" begin="1.14s" repeatCount="indefinite" values="-3;-55"/><animate attributeName="opacity" dur="1.56s" begin="1.14s" repeatCount="indefinite" values="0;1;0"/></circle>
     <circle r="1.6" fill="#f59e0b"><animate attributeName="cx" dur="1.4s" repeatCount="indefinite" values="-24;-84"/><animate attributeName="cy" dur="1.4s" repeatCount="indefinite" values="6;26"/><animate attributeName="opacity" dur="1.4s" repeatCount="indefinite" values="1;0"/></circle>
     <circle r="1.2" fill="#22d3ee"><animate attributeName="cx" dur="1.9s" repeatCount="indefinite" values="-30;-110"/><animate attributeName="cy" dur="1.9s" repeatCount="indefinite" values="0;-12"/><animate attributeName="opacity" dur="1.9s" repeatCount="indefinite" values="1;0"/></circle>
     <circle r="1.1" fill="#a78bfa"><animate attributeName="cx" dur="1.6s" begin=".5s" repeatCount="indefinite" values="-26;-90"/><animate attributeName="cy" dur="1.6s" begin=".5s" repeatCount="indefinite" values="10;40"/><animate attributeName="opacity" dur="1.6s" begin=".5s" repeatCount="indefinite" values="1;0"/></circle>
@@ -523,6 +541,28 @@ footer{padding:40px 0;text-align:center;color:var(--muted);font-size:.85rem}
 
   // tap to expand project cards (touch)
   $$('.proj').forEach(c => { c.tabIndex = 0; c.addEventListener('click', e => { if (e.target.closest('a')) return; c.classList.toggle('open'); }); });
+  // fire embers: trail behind the phoenix + soft ambient sparks
+  const cv = $('#embers'), cx2 = cv.getContext('2d'); let parts = [];
+  const fit = () => { const d = devicePixelRatio || 1; cv.width = innerWidth * d; cv.height = innerHeight * d; cx2.setTransform(d, 0, 0, d, 0, 0); };
+  fit(); addEventListener('resize', fit);
+  const cols = ['251,191,36', '249,115,22', '239,68,68', '253,230,138'];
+  window.__ember = (x, y, dir) => {
+    for (let i = 0; i < 3; i++) parts.push({ x: x + (Math.random() - .5) * 14, y: y + (Math.random() - .5) * 10, vx: -dir * (0.6 + Math.random() * 1.4), vy: -(0.3 + Math.random() * 1.1), life: 1, r: .8 + Math.random() * 2.2, c: cols[Math.random() * cols.length | 0] });
+  };
+  const tickE = () => {
+    cx2.clearRect(0, 0, innerWidth, innerHeight);
+    if (Math.random() < .25) parts.push({ x: Math.random() * innerWidth, y: innerHeight + 6, vx: (Math.random() - .5) * .4, vy: -(0.4 + Math.random() * .8), life: 1.4, r: .6 + Math.random() * 1.4, c: cols[Math.random() * cols.length | 0] });
+    cx2.globalCompositeOperation = 'lighter';
+    parts = parts.filter(p => (p.life -= .016) > 0);
+    for (const p of parts) {
+      p.x += p.vx; p.y += p.vy; p.vy -= .006; p.vx *= .99;
+      const a = Math.min(p.life, 1);
+      cx2.beginPath(); cx2.fillStyle = `rgba(${p.c},${a * .85})`; cx2.shadowColor = `rgba(${p.c},${a})`; cx2.shadowBlur = 8;
+      cx2.arc(p.x, p.y, p.r * (0.6 + a * .4), 0, 7); cx2.fill();
+    }
+    requestAnimationFrame(tickE);
+  };
+  if (!reduce) requestAnimationFrame(tickE);
   // phoenix companion: glides across the page following scroll
   const phx = $('#phx');
   if (!reduce) {
@@ -539,6 +579,7 @@ footer{padding:40px 0;text-align:center;color:var(--muted);font-size:.85rem}
       if (Math.abs(dx) > 2) face = dx > 0 ? 1 : -1;
       const tilt = Math.max(-18, Math.min(18, (ty - cy) * .25));
       phx.style.transform = `translate(${cx}px,${cy}px) scaleX(${face}) rotate(${tilt * face}deg)`;
+      const pw = parseFloat(getComputedStyle(phx).width) || 150; if (window.__ember && intro > .05) window.__ember(cx + (face > 0 ? pw * .25 : pw * .75), cy + pw * .62, face);
       requestAnimationFrame(loop);
     };
     requestAnimationFrame(loop);
