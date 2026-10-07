@@ -196,6 +196,14 @@ footer{padding:40px 0;text-align:center;color:var(--muted);font-size:.85rem}
 .proj:hover::before,.proj.open::before{opacity:1}
 @media (max-width:520px){.proj{height:470px}}
 
+
+/* phoenix companion */
+#phx{position:fixed;left:0;top:0;width:150px;height:auto;z-index:40;pointer-events:none;opacity:0;transition:opacity .8s;will-change:transform;filter:drop-shadow(0 0 18px rgba(34,211,238,.25))}
+#phx.on{opacity:.92}
+[data-theme="light"] #phx{filter:drop-shadow(0 0 10px rgba(124,58,237,.25))}
+.motto{margin-top:18px;font-family:"JetBrains Mono",monospace;font-size:.85rem;color:var(--accent);letter-spacing:.04em}
+@media (max-width:700px){#phx{width:96px}}
+
 /* reveal */
 .reveal{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
 .reveal.in{opacity:1;transform:none}
@@ -220,6 +228,30 @@ footer{padding:40px 0;text-align:center;color:var(--muted);font-size:.85rem}
 <body>
 <div id="progress"></div>
 <div id="glow"></div>
+<svg id="phx" viewBox="-140 -95 200 155" aria-hidden="true"><defs>
+<linearGradient id="tailS" x1="0" y1="0" x2="1" y2="0" gradientUnits="objectBoundingBox">
+  <stop offset="0" stop-color="#f59e0b" stop-opacity="0"/><stop offset=".35" stop-color="#f59e0b" stop-opacity=".55"/><stop offset=".7" stop-color="#a78bfa" stop-opacity=".85"/><stop offset="1" stop-color="#22d3ee"/></linearGradient>
+<linearGradient id="wingS" x1="0" y1="1" x2="0" y2="0">
+  <stop offset="0" stop-color="#22d3ee" stop-opacity=".45"/><stop offset=".6" stop-color="#a78bfa" stop-opacity=".25"/><stop offset="1" stop-color="#f59e0b" stop-opacity=".35"/></linearGradient>
+<linearGradient id="wingbS" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#a78bfa" stop-opacity=".3"/><stop offset="1" stop-color="#a78bfa" stop-opacity=".05"/></linearGradient>
+<linearGradient id="bodyS" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#a78bfa"/><stop offset="1" stop-color="#22d3ee"/></linearGradient>
+<filter id="glowS" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+<g transform="scale(1.0)">
+  <g fill="none" stroke="url(#tailS)" stroke-linecap="round" filter="url(#glowS)"><path d="M-4 2 C-34 6 -62 22 -96 18 C-108 16 -112 6 -104 2" stroke-width="2.2"><animate attributeName="d" dur="1.9s" repeatCount="indefinite" values="M-4 2 C-34 6 -62 22 -96 18 C-108 16 -112 6 -104 2;M-4 2 C-34 12 -64 14 -98 24 C-110 26 -116 16 -108 10;M-4 2 C-34 6 -62 22 -96 18 C-108 16 -112 6 -104 2" calcMode="spline" keyTimes="0;.5;1" keySplines=".4 0 .6 1;.4 0 .6 1"/></path><path d="M-4 0 C-40 -2 -76 -6 -118 -16 C-128 -18 -132 -10 -124 -6" stroke-width="1.8"><animate attributeName="d" dur="2.3s" repeatCount="indefinite" values="M-4 0 C-40 -2 -76 -6 -118 -16 C-128 -18 -132 -10 -124 -6;M-4 0 C-40 4 -78 -12 -120 -8 C-130 -6 -132 2 -124 4;M-4 0 C-40 -2 -76 -6 -118 -16 C-128 -18 -132 -10 -124 -6" calcMode="spline" keyTimes="0;.5;1" keySplines=".4 0 .6 1;.4 0 .6 1"/></path><path d="M-4 4 C-28 18 -48 40 -80 50 C-90 52 -94 44 -88 40" stroke-width="1.6"><animate attributeName="d" dur="1.7s" repeatCount="indefinite" values="M-4 4 C-28 18 -48 40 -80 50 C-90 52 -94 44 -88 40;M-4 4 C-30 22 -54 34 -84 44 C-94 46 -96 38 -90 34;M-4 4 C-28 18 -48 40 -80 50 C-90 52 -94 44 -88 40" calcMode="spline" keyTimes="0;.5;1" keySplines=".4 0 .6 1;.4 0 .6 1"/></path><path d="M-4 1 C-36 10 -70 34 -104 36" stroke-width="1.2"><animate attributeName="d" dur="2.0s" repeatCount="indefinite" values="M-4 1 C-36 10 -70 34 -104 36;M-4 1 C-36 16 -72 26 -106 42;M-4 1 C-36 10 -70 34 -104 36" calcMode="spline" keyTimes="0;.5;1" keySplines=".4 0 .6 1;.4 0 .6 1"/></path></g>
+  <g transform="translate(12,-4)"><g fill="url(#wingbS)" stroke="#a78bfa" stroke-opacity=".7" stroke-width=".8" opacity=".6"><path d="M0 0 Q2.7 -19.0 -12.0 -39.1 Q-7.4 -21.4 0 0Z"/><path d="M0 0 Q-3.5 -24.8 -24.9 -48.2 Q-14.5 -26.2 0 0Z"/><path d="M0 0 Q-10.8 -26.7 -39.1 -49.0 Q-22.2 -26.5 0 0Z"/><path d="M0 0 Q-16.3 -24.1 -49.0 -40.4 Q-27.6 -21.6 0 0Z"/><path d="M0 0 Q-18.3 -18.5 -50.4 -25.6 Q-28.2 -13.3 0 0Z"/><path d="M0 0 Q-16.4 -12.3 -42.6 -10.2 Q-23.7 -4.8 0 0Z"/>
+    <animateTransform attributeName="transform" type="rotate" dur="1.15s" repeatCount="indefinite" values="8;-34;8" calcMode="spline" keyTimes="0;.5;1" keySplines=".4 0 .6 1;.4 0 .6 1" begin="-0.15s"/></g></g>
+  <path d="M-6 2 C4 -4 16 -6 24 -8 C30 -10 34 -16 40 -16 C44 -16 47 -14 50 -12 L44 -10.5 C40 -10 36 -6 30 -2 C20 4 6 6 -6 2Z" fill="#0b1120" stroke="url(#bodyS)" stroke-width="1.5" filter="url(#glowS)"/>
+  <g fill="none" stroke="url(#bodyS)" stroke-width="1.2" stroke-linecap="round">
+    <path d="M41 -16 C38 -24 32 -28 25 -29"/><path d="M43 -16 C42 -26 37 -33 30 -37"/><path d="M39 -15 C34 -20 28 -21 21 -21"/></g>
+  <circle cx="42.5" cy="-13.2" r="1.1" fill="#f8fafc"/>
+  <g transform="translate(14,-5)"><g fill="url(#wingS)" stroke="url(#bodyS)" stroke-width="1" filter="url(#glowS)"><path d="M0 0 Q5.0 -22.8 -10.3 -48.9 Q-6.6 -26.8 0 0Z"/><path d="M0 0 Q-2.0 -30.2 -25.1 -60.8 Q-14.6 -33.2 0 0Z"/><path d="M0 0 Q-10.9 -33.7 -43.0 -64.3 Q-24.4 -34.9 0 0Z"/><path d="M0 0 Q-19.2 -32.3 -58.8 -57.4 Q-33.0 -31.0 0 0Z"/><path d="M0 0 Q-24.5 -26.7 -67.2 -41.9 Q-37.5 -22.3 0 0Z"/><path d="M0 0 Q-25.4 -19.1 -65.2 -22.7 Q-36.2 -11.7 0 0Z"/><path d="M0 0 Q-22.2 -11.9 -53.7 -5.3 Q-29.7 -2.0 0 0Z"/>
+    <animateTransform attributeName="transform" type="rotate" dur="1.15s" repeatCount="indefinite" values="10;-40;10" calcMode="spline" keyTimes="0;.5;1" keySplines=".4 0 .6 1;.4 0 .6 1"/></g></g>
+  <g>
+    <circle r="1.6" fill="#f59e0b"><animate attributeName="cx" dur="1.4s" repeatCount="indefinite" values="-24;-84"/><animate attributeName="cy" dur="1.4s" repeatCount="indefinite" values="6;26"/><animate attributeName="opacity" dur="1.4s" repeatCount="indefinite" values="1;0"/></circle>
+    <circle r="1.2" fill="#22d3ee"><animate attributeName="cx" dur="1.9s" repeatCount="indefinite" values="-30;-110"/><animate attributeName="cy" dur="1.9s" repeatCount="indefinite" values="0;-12"/><animate attributeName="opacity" dur="1.9s" repeatCount="indefinite" values="1;0"/></circle>
+    <circle r="1.1" fill="#a78bfa"><animate attributeName="cx" dur="1.6s" begin=".5s" repeatCount="indefinite" values="-26;-90"/><animate attributeName="cy" dur="1.6s" begin=".5s" repeatCount="indefinite" values="10;40"/><animate attributeName="opacity" dur="1.6s" begin=".5s" repeatCount="indefinite" values="1;0"/></circle>
+  </g>
+</g></svg>
 
 <nav id="nav">
   <div class="wrap nav-in">
@@ -280,6 +312,7 @@ footer{padding:40px 0;text-align:center;color:var(--muted);font-size:.85rem}
       <h2 data-es="Código limpio, datos seguros y sistemas que la gente usa todos los días." data-en="Clean code, secure data and systems people use every day.">Código limpio, datos seguros y sistemas que la gente usa todos los días.</h2>
       <p data-es="Soy <b>Ingeniero de Sistemas</b> (UNEFA, Trabajo Especial de Grado aprobado con <b>20/20</b>) y desarrollador backend. Desde 2025 construyo y mantengo sistemas internos en producción para instituciones públicas: recursos humanos, nómina, beneficios y salud." data-en="I'm a <b>Systems Engineer</b> (UNEFA, thesis graded <b>20/20</b>) and backend developer. Since 2025 I've built and maintained production systems for public institutions: HR, payroll, benefits and health.">Soy <b>Ingeniero de Sistemas</b> (UNEFA, Trabajo Especial de Grado aprobado con <b>20/20</b>) y desarrollador backend. Desde 2025 construyo y mantengo sistemas internos en producción para instituciones públicas: recursos humanos, nómina, beneficios y salud.</p>
       <p data-es="Me enfoco en <b>APIs REST bien diseñadas</b>, modelos de datos sólidos y seguridad (JWT, OAuth2, RBAC). Aprendo rápido: pasé de Django a NestJS y hoy exploro FastAPI, Go y Rust." data-en="I focus on <b>well-designed REST APIs</b>, solid data models and security (JWT, OAuth2, RBAC). I learn fast: I moved from Django to NestJS and I'm now exploring FastAPI, Go and Rust.">Me enfoco en <b>APIs REST bien diseñadas</b>, modelos de datos sólidos y seguridad (JWT, OAuth2, RBAC). Aprendo rápido: pasé de Django a NestJS y hoy exploro FastAPI, Go y Rust.</p>
+      <p class="motto" data-es="// Como el ave fénix: cada versión renace mejor." data-en="// Like the phoenix: every version rises better.">// Como el ave fénix: cada versión renace mejor.</p>
     </div>
     <div class="facts">
       <div class="fact reveal d1"><span class="ic"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg></span><div><b data-es="Ingeniería de Sistemas" data-en="Systems Engineering">Ingeniería de Sistemas</b><small data-es="UNEFA · 2021 – 2026 · Tesis 20/20" data-en="UNEFA · 2021 – 2026 · Thesis 20/20">UNEFA · 2021 – 2026 · Tesis 20/20</small></div></div>
@@ -490,6 +523,26 @@ footer{padding:40px 0;text-align:center;color:var(--muted);font-size:.85rem}
 
   // tap to expand project cards (touch)
   $$('.proj').forEach(c => { c.tabIndex = 0; c.addEventListener('click', e => { if (e.target.closest('a')) return; c.classList.toggle('open'); }); });
+  // phoenix companion: glides across the page following scroll
+  const phx = $('#phx');
+  if (!reduce) {
+    let cx = -200, cy = innerHeight * .35, tx = cx, ty = cy, face = 1, t0 = performance.now();
+    phx.classList.add('on');
+    const loop = now => {
+      const max = document.documentElement.scrollHeight - innerHeight || 1;
+      const p = scrollY / max, w = innerWidth, h = innerHeight, el = (now - t0) / 1000;
+      const intro = Math.min(el / 3.2, 1);                       // entrance flight from the left
+      const k = p * Math.PI * 5 + el * .25;                      // sweep left-right while scrolling
+      tx = intro < 1 ? -200 + (w * .62 + 200) * (1 - Math.pow(1 - intro, 3)) : w * (.5 + .4 * Math.sin(k)) - 75;
+      ty = h * (.18 + .55 * (.5 + .5 * Math.sin(k * .7 + 1.2))) + Math.sin(el * 1.6) * 10;
+      const dx = tx - cx; cx += dx * .045; cy += (ty - cy) * .045;
+      if (Math.abs(dx) > 2) face = dx > 0 ? 1 : -1;
+      const tilt = Math.max(-18, Math.min(18, (ty - cy) * .25));
+      phx.style.transform = `translate(${cx}px,${cy}px) scaleX(${face}) rotate(${tilt * face}deg)`;
+      requestAnimationFrame(loop);
+    };
+    requestAnimationFrame(loop);
+  }
   // reveal + counters
   const io = new IntersectionObserver(es => es.forEach(e => {
     if (!e.isIntersecting) return;
