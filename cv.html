@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CV · José Fernando Bolívar · Backend Developer</title>
+<meta name="description" content="Currículum de José Fernando Bolívar — Ingeniero de Sistemas y desarrollador backend (Python, Django REST Framework, NestJS, PostgreSQL).">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%2306b6d4'/><text x='50%25' y='56%25' font-family='monospace' font-size='28' font-weight='700' fill='%230b1120' text-anchor='middle' dominant-baseline='middle'>JB</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#070b16;--paper:#0b1120;--card:#0f172a;--line:#1e293b;--text:#e2e8f0;--muted:#94a3b8;--a:#22d3ee;--b:#a78bfa;--fire:#f97316}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.mono{font-family:"JetBrains Mono",monospace}
+.grad{background:linear-gradient(90deg,var(--a),var(--b));-webkit-background-clip:text;background-clip:text;color:transparent}
+#bg{position:fixed;inset:0;z-index:0;pointer-events:none}
+.bggrid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(148,163,184,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(148,163,184,.05) 1px,transparent 1px);background-size:40px 40px;mask-image:radial-gradient(ellipse at 50% 20%,#000 30%,transparent 80%)}
+
+/* toolbar */
+.barwrap{}
+.bar{position:sticky;top:0;z-index:20;background:rgba(7,11,22,.72);border-bottom:1px solid rgba(30,41,59,.6);display:flex;justify-content:space-between;align-items:center;gap:10px;max-width:1080px;margin:0 auto;padding:14px 20px;backdrop-filter:blur(10px)}
+.bar .back{font-size:.88rem;color:var(--muted);display:inline-flex;gap:8px;align-items:center;transition:color .2s}
+.bar .back:hover{color:var(--a)}
+.tools{display:flex;gap:8px}
+.btn{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 14px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--text);font:600 .82rem Inter;cursor:pointer;transition:transform .2s,border-color .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);border-color:var(--a)}
+.btn.primary{background:linear-gradient(135deg,var(--a),var(--b));color:#0b1120;border:none;box-shadow:0 6px 24px rgba(34,211,238,.25)}
+.btn svg{width:16px;height:16px}
+
+/* sheet */
+.sheet{position:relative;z-index:1;max-width:1080px;margin:10px auto 60px;padding:0 20px}
+.paper{background:linear-gradient(180deg,rgba(15,23,42,.92),rgba(11,17,32,.96));border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.45);position:relative}
+.paper::before{content:"";position:absolute;inset:0;border-radius:24px;padding:1px;background:linear-gradient(135deg,rgba(34,211,238,.6),transparent 35%,transparent 65%,rgba(249,115,22,.5));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+
+/* header */
+header.hd{position:relative;padding:46px 44px 36px;display:grid;grid-template-columns:1fr 230px;gap:24px;align-items:center;border-bottom:1px solid var(--line);overflow:hidden}
+header.hd::after{content:"";position:absolute;right:-120px;top:-140px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(249,115,22,.18),rgba(167,139,250,.1) 40%,transparent 70%);animation:breathe 6s ease-in-out infinite}
+@keyframes breathe{50%{transform:scale(1.12);opacity:.8}}
+.kicker{font-size:.78rem;letter-spacing:.24em;color:var(--muted);text-transform:uppercase}
+h1{font-size:clamp(2.1rem,4.6vw,3.3rem);line-height:1.05;letter-spacing:-.035em;font-weight:800;margin:10px 0 8px}
+.role{font-size:1.1rem;color:var(--text);min-height:1.7em}
+.caret{display:inline-block;width:2px;height:1.05em;background:var(--a);vertical-align:-3px;margin-left:3px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.contact{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:18px;font-size:.86rem;color:var(--muted)}
+.contact a,.contact span{display:inline-flex;align-items:center;gap:7px;transition:color .2s}
+.contact a:hover{color:var(--a)}
+.contact svg{width:15px;height:15px;color:var(--a)}
+.status{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:6px 12px;border-radius:99px;border:1px solid rgba(52,211,153,.35);background:rgba(52,211,153,.08);font-size:.78rem;color:#6ee7b7}
+.dot{width:7px;height:7px;border-radius:50%;background:#34d399;animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(52,211,153,.6)}100%{box-shadow:0 0 0 9px rgba(52,211,153,0)}}
+.emblem{position:relative;z-index:1;width:230px;justify-self:end}
+.emblem svg{width:100%;height:auto;animation:hover 5s ease-in-out infinite;filter:drop-shadow(0 0 22px rgba(249,115,22,.25))}
+@keyframes hover{50%{transform:translateY(-8px)}}
+
+/* body grid */
+.grid{display:grid;grid-template-columns:300px 1fr}
+aside{padding:34px 30px;border-right:1px solid var(--line);background:rgba(7,11,22,.35)}
+main{padding:34px 40px}
+h2{font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:var(--a);display:flex;align-items:center;gap:10px;margin:0 0 16px}
+h2::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
+section{margin-bottom:34px}
+p.lead{color:#cbd5e1}
+p.lead b{color:var(--text)}
+
+/* skills */
+.sg{margin-bottom:14px}
+.sg h4{font-size:.82rem;color:var(--muted);font-weight:600;margin-bottom:8px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:.75rem;padding:4px 10px;border-radius:7px;border:1px solid var(--line);background:var(--card);transition:all .2s}
+.chip:hover{border-color:var(--a);color:var(--a);transform:translateY(-2px)}
+.edu b{display:block;font-size:.95rem}
+.edu small{display:block;color:var(--muted);font-size:.82rem;margin-top:2px}
+.badge{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:5px 10px;border-radius:8px;font-size:.78rem;font-weight:600;color:#fdba74;background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.35)}
+.lang{display:flex;justify-content:space-between;font-size:.88rem;margin-bottom:8px}
+.lang span:last-child{color:var(--muted)}
+.meter{height:4px;border-radius:4px;background:var(--line);overflow:hidden;margin:-2px 0 12px}
+.meter i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--a),var(--b));border-radius:4px;transition:width 1.4s cubic-bezier(.2,.8,.2,1)}
+.in .meter i{width:var(--w)}
+
+/* timeline */
+.tl{position:relative;padding-left:28px}
+.tl::before{content:"";position:absolute;left:6px;top:8px;bottom:8px;width:2px;background:var(--line)}
+.tl .fill{position:absolute;left:6px;top:8px;width:2px;height:0;background:linear-gradient(var(--a),var(--b),var(--fire));transition:height 1.6s ease;box-shadow:0 0 10px rgba(34,211,238,.5)}
+.in .tl .fill{height:calc(100% - 16px)}
+.job{position:relative;margin-bottom:24px}
+.job::before{content:"";position:absolute;left:-27px;top:7px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--a);box-shadow:0 0 0 4px rgba(34,211,238,.12)}
+.job-h{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 12px}
+.job h3{font-size:1.05rem}
+.when{font-size:.8rem;color:var(--muted);font-family:"JetBrains Mono",monospace}
+.org{color:var(--a);font-size:.88rem;font-weight:500}
+.job ul{margin:8px 0 0 16px;color:#cbd5e1;font-size:.9rem}
+.job li{margin-bottom:4px}
+.job li::marker{color:var(--b)}
+
+/* projects */
+.projs{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.pj{padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--card);position:relative;overflow:hidden;transition:transform .3s,border-color .3s}
+.pj::before{content:"";position:absolute;inset:0;background:radial-gradient(300px circle at var(--x,50%) var(--y,0%),rgba(34,211,238,.12),transparent 45%);opacity:0;transition:opacity .3s}
+.pj:hover{transform:translateY(-4px);border-color:rgba(34,211,238,.5)}
+.pj:hover::before{opacity:1}
+.pj h3{font-size:.95rem;margin-bottom:6px}
+.pj p{font-size:.84rem;color:var(--muted)}
+.pj .t{margin-top:10px;display:flex;flex-wrap:wrap;gap:5px}
+.pj .t span{font-family:"JetBrains Mono",monospace;font-size:.68rem;color:var(--a);background:var(--bg);padding:2px 7px;border-radius:5px}
+.pj.wide{grid-column:1/-1}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .8s ease}
+.rv.in{opacity:1;transform:none}
+footer{text-align:center;color:var(--muted);font-size:.8rem;padding:0 0 40px;position:relative;z-index:1}
+
+@media (max-width:860px){
+  header.hd{grid-template-columns:1fr;padding:34px 24px 28px}
+  .emblem{position:absolute;right:-30px;top:10px;width:170px;opacity:.5}
+  .grid{grid-template-columns:1fr}
+  aside{border-right:none;border-bottom:1px solid var(--line);padding:28px 24px}
+  main{padding:28px 24px}
+  .projs{grid-template-columns:1fr}
+  .bar .label{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}.meter i{width:var(--w)}.tl .fill{height:calc(100% - 16px)}}
+
+/* print: clean, light, one document */
+@media print{
+  @page{size:A4;margin:12mm}
+  :root{--bg:#fff;--paper:#fff;--card:#fff;--line:#d9e0ea;--text:#0f172a;--muted:#475569;--a:#0e7490;--b:#6d28d9}
+  body{background:#fff;color:#0f172a;font-size:10.5pt}
+  #bg,.bggrid,.bar,.emblem,footer,header.hd::after,.paper::before{display:none!important}
+  .sheet{margin:0;padding:0;max-width:none}
+  .paper{border:none;box-shadow:none;background:#fff;border-radius:0}
+  header.hd{padding:0 0 12px;grid-template-columns:1fr}
+  .grad{color:#0f172a;-webkit-text-fill-color:#0f172a;background:none}
+  .grid{grid-template-columns:62mm 1fr}
+  aside{background:#f8fafc;padding:12px 14px;border-right:1px solid var(--line)}
+  main{padding:12px 0 0 16px}
+  p.lead,.job ul{color:#1e293b}
+  .rv{opacity:1;transform:none}
+  .meter i{width:var(--w)} .tl .fill{height:calc(100% - 16px);box-shadow:none}
+  .caret,.status .dot{display:none}
+  .pj,.job,.sg{break-inside:avoid}
+  section{margin-bottom:12px}
+  h2{margin-bottom:8px}
+  .status{display:none}
+  .chip{font-size:7.5pt;padding:1px 6px}
+  .sg{margin-bottom:8px}
+  .job{margin-bottom:10px}
+  .job ul{font-size:9.5pt}
+  .projs{gap:8px;grid-template-columns:1fr 1fr}
+  h2{break-after:avoid}
+  .emblem{display:none!important}
+  .pj{padding:8px 10px}
+  h1{font-size:24pt}
+  .contact{font-size:8.5pt;margin-top:8px}
+  .pj{background:#fff}
+  .pj .t span{background:#f1f5f9}
+  a{color:inherit}
+}
+</style>
+</head>
+<body>
+<canvas id="bg" aria-hidden="true"></canvas>
+<div class="bggrid"></div>
+
+<div class="bar">
+  <a class="back" href="./"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg><span data-es="Volver al portafolio" data-en="Back to portfolio">Volver al portafolio</span></a>
+  <div class="tools">
+    <button class="btn" id="lang">EN</button>
+    <button class="btn primary" id="print"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg><span class="label" data-es="Descargar PDF" data-en="Download PDF">Descargar PDF</span></button>
+  </div>
+</div>
+
+<div class="sheet">
+<article class="paper">
+  <header class="hd">
+    <div>
+      <div class="kicker mono rv" data-es="Currículum · Ingeniero de Sistemas" data-en="Résumé · Systems Engineer">Currículum · Ingeniero de Sistemas</div>
+      <h1 class="rv"><span class="grad">José Fernando Bolívar</span></h1>
+      <div class="role rv"><span id="typed"></span><i class="caret"></i></div>
+      <div class="contact rv">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><span data-es="Caracas, Venezuela · Remoto · UTC-4" data-en="Caracas, Venezuela · Remote · UTC-4">Caracas, Venezuela · Remoto · UTC-4</span></span>
+        <a href="mailto:josefernandobolivar2@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>josefernandobolivar2@gmail.com</a>
+        <a href="https://www.linkedin.com/in/jos%C3%A9-fernando-bolivar-82600a348" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 11v5M8 8v.01M12 16v-5M16 16v-3a2 2 0 0 0-4 0"/></svg>LinkedIn</a>
+        <a href="https://github.com/JFernandoBolivar" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-4 1.5-4-2-6-2.5M15 21v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1-.3-3.4 1.3a11.6 11.6 0 0 0-6 0C6.8 2.8 5.8 3.1 5.8 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4.4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>github.com/JFernandoBolivar</a>
+        <a href="./"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>jfernandobolivar.github.io</a>
+      </div>
+      <div class="status rv"><i class="dot"></i><span data-es="Disponible para proyectos freelance y part-time remotos" data-en="Available for remote freelance &amp; part-time work">Disponible para proyectos freelance y part-time remotos</span></div>
+    </div>
+    <div class="emblem" aria-hidden="true"><svg viewBox="-140 -95 200 155"><defs>
+<linearGradient id="tailC" x1="0" y1="0" x2="1" y2="0" gradientUnits="objectBoundingBox">
+  <stop offset="0" stop-color="#f59e0b" stop-opacity="0"/><stop offset=".35" stop-color="#f59e0b" stop-opacity=".55"/><stop offset=".7" stop-color="#a78bfa" stop-opacity=".85"/><stop offset="1" stop-color="#22d3ee"/></linearGradient>
+<linearGradient id="wingC" x1="0" y1="1" x2="0" y2="0">
+  <stop offset="0" stop-color="#22d3ee" stop-opacity=".45"/><stop offset=".6" stop-color="#a78bfa" stop-opacity=".25"/><stop offset="1" stop-color="#f59e0b" stop-opacity=".35"/></linearGradient>
+<linearGradient id="wingbC" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#a78bfa" stop-opacity=".3"/><stop offset="1" stop-color="#a78bfa" stop-opacity=".05"/></linearGradient>
+<linearGradient id="bodyC" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#a78bfa"/><stop offset="1" stop-color="#22d3ee"/></linearGradient>
+<linearGradient id="firegC" x1="0" y1="0" x2="1" y2="0" gradientUnits="objectBoundingBox">
+  <stop offset="0" stop-color="#dc2626" stop-opacity="0"/><stop offset=".4" stop-color="#f97316" stop-opacity=".7"/><stop offset=".8" stop-color="#fbbf24" stop-opacity=".9"/><stop offset="1" stop-color="#fde68a"/></linearGradient>
+<radialGradient id="coreC"><stop offset="0" stop-color="#fbbf24" stop-opacity=".55"/><stop offset=".5" stop-color="#f97316" stop-opacity=".25"/><stop offset="1" stop-color="#dc2626" stop-opacity="0"/></radialGradient>
+<filter id="fireC" x="-60%" y="-60%" width="220%" height="220%">
+  <feTurbulence type="fractalNoise" baseFrequency="0.035 0.09" numOctaves="2" seed="3" result="n">
+    <animate attributeName="baseFrequency" dur="1.6s" repeatCount="indefinite" values="0.035 0.09;0.045 0.12;0.035 0.09"/></feTurbulence>
+  <feDisplacementMap in="SourceGraphic" in2="n" scale="9" xChannelSelector="R" yChannelSelector="G" result="d"/>
+  <feGaussianBlur in="d" stdDeviation="1.6" result="b"/>
+  <feMerge><feMergeNode in="b"/><feMergeNode in="d"/></feMerge></filter>
+<filter id="glowC" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+<g transform="scale(1.0)">
+  <ellipse cx="14" cy="-2" rx="34" ry="18" fill="url(#coreC)">
+    <animate attributeName="rx" dur="0.9s" repeatCount="indefinite" values="32;38;32"/><animate attributeName="opacity" dur="0.7s" repeatCount="indefinite" values=".8;1;.8"/></ellipse>
+  <g fill="none" stroke="url(#firegC)" stroke-linecap="round" filter="url(#fireC)" opacity=".85">
+    <path d="M-2 1 C-30 6 -58 22 -96 18" stroke-width="7"/>
+    <path d="M-2 0 C-40 -2 -80 -6 -122 -14" stroke-width="5"/>
+    <path d="M-2 4 C-28 18 -50 38 -82 48" stroke-width="5"/>
+  </g>
+  <g fill="none" stroke="url(#tailC)" stroke-linecap="round" filter="url(#glowC)"><path d="M-4 2 C-34 6 -62 22 -96 18 C-108 16 -112 6 -104 2" stroke-width="2.2"><animate attributeName="d" dur="1.9s" repeatCount="indefinite" values="M-4 2 C-34 6 -62 22 -96 18 C-108 16 -112 6 -104 2;M-4 2 C-34 12 -64 14 -98 24 C-110 26 -116 16 -108 10;M-4 2 C-34 6 -62 22 -96 18 C-108 16 -112 6 -104 2" calcMode="spline" keyTimes="0;.5;1" keySplines=".4 0 .6 1;.4 0 .6 1"/></path><path d="M-4 0 C-40 -2 -76 -6 -118 -16 C-128 -18 -132 -10 -124 -6" stroke-width="1.8"><animate attributeName="d" dur="2.3s" repeatCount="indefinite" values="M-4 0 C-40 -2 -76 -6 -118 -16 C-128 -18 -132 -10 -124 -6;M-4 0 C-40 4 -78 -12 -120 -8 C-130 -6 -132 2 -124 4;M-4 0 C-40 -2 -76 -6 -118 -16 C-128 -18 -132 -10 -124 -6" calcMode="spline" keyTimes="0;.5;1" keySplines=".4 0 .6 1;.4 0 .6 1"/></path><path d="M-4 4 C-28 18 -48 40 -80 50 C-90 52 -94 44 -88 40" stroke-width="1.6"><animate attributeName="d" dur="1.7s" repeatCount="indefinite" values="M-4 4 C-28 18 -48 40 -80 50 C-90 52 -94 44 -88 40;M-4 4 C-30 22 -54 34 -84 44 C-94 46 -96 38 -90 34;M-4 4 C-28 18 -48 40 -80 50 C-90 52 -94 44 -88 40" calcMode="spline" keyTimes="0;.5;1" keySplines=".4 0 .6 1;.4 0 .6 1"/></path><path d="M-4 1 C-36 10 -70 34 -104 36" stroke-width="1.2"><animate attributeName="d" dur="2.0s" repeatCount="indefinite" values="M-4 1 C-36 10 -70 34 -104 36;M-4 1 C-36 16 -72 26 -106 42;M-4 1 C-36 10 -70 34 -104 36" calcMode="spline" keyTimes="0;.5;1" keySplines=".4 0 .6 1;.4 0 .6 1"/></path></g>
+  <g transform="translate(12,-4)"><g fill="url(#wingbC)" stroke="#a78bfa" stroke-opacity=".7" stroke-width=".8" opacity=".6"><path d="M0 0 Q2.7 -19.0 -12.0 -39.1 Q-7.4 -21.4 0 0Z"/><path d="M0 0 Q-3.5 -24.8 -24.9 -48.2 Q-14.5 -26.2 0 0Z"/><path d="M0 0 Q-10.8 -26.7 -39.1 -49.0 Q-22.2 -26.5 0 0Z"/><path d="M0 0 Q-16.3 -24.1 -49.0 -40.4 Q-27.6 -21.6 0 0Z"/><path d="M0 0 Q-18.3 -18.5 -50.4 -25.6 Q-28.2 -13.3 0 0Z"/><path d="M0 0 Q-16.4 -12.3 -42.6 -10.2 Q-23.7 -4.8 0 0Z"/>
+    <animateTransform attributeName="transform" type="rotate" dur="1.3s" repeatCount="indefinite" values="8;-34;8" calcMode="spline" keyTimes="0;.5;1" keySplines=".4 0 .6 1;.4 0 .6 1" begin="-0.15s"/></g></g>
+  <path d="M-6 2 C4 -4 16 -6 24 -8 C30 -10 34 -16 40 -16 C44 -16 47 -14 50 -12 L44 -10.5 C40 -10 36 -6 30 -2 C20 4 6 6 -6 2Z" fill="#0b1120" stroke="url(#bodyC)" stroke-width="1.5" filter="url(#glowC)"/>
+  <g fill="none" stroke="url(#bodyC)" stroke-width="1.2" stroke-linecap="round">
+    <path d="M41 -16 C38 -24 32 -28 25 -29"/><path d="M43 -16 C42 -26 37 -33 30 -37"/><path d="M39 -15 C34 -20 28 -21 21 -21"/></g>
+  <circle cx="42.5" cy="-13.2" r="1.1" fill="#f8fafc"/>
+  <g transform="translate(14,-5)"><g fill="url(#wingC)" stroke="url(#bodyC)" stroke-width="1" filter="url(#glowC)"><path d="M0 0 Q5.0 -22.8 -10.3 -48.9 Q-6.6 -26.8 0 0Z"/><path d="M0 0 Q-2.0 -30.2 -25.1 -60.8 Q-14.6 -33.2 0 0Z"/><path d="M0 0 Q-10.9 -33.7 -43.0 -64.3 Q-24.4 -34.9 0 0Z"/><path d="M0 0 Q-19.2 -32.3 -58.8 -57.4 Q-33.0 -31.0 0 0Z"/><path d="M0 0 Q-24.5 -26.7 -67.2 -41.9 Q-37.5 -22.3 0 0Z"/><path d="M0 0 Q-25.4 -19.1 -65.2 -22.7 Q-36.2 -11.7 0 0Z"/><path d="M0 0 Q-22.2 -11.9 -53.7 -5.3 Q-29.7 -2.0 0 0Z"/>
+    <animateTransform attributeName="transform" type="rotate" dur="1.3s" repeatCount="indefinite" values="10;-40;10" calcMode="spline" keyTimes="0;.5;1" keySplines=".4 0 .6 1;.4 0 .6 1"/></g></g>
+  <g><circle r="1.2" fill="#fbbf24"><animate attributeName="cx" dur="1.18s" begin="0.8s" repeatCount="indefinite" values="-20;-69"/><animate attributeName="cy" dur="1.18s" begin="0.8s" repeatCount="indefinite" values="6;-17"/><animate attributeName="opacity" dur="1.18s" begin="0.8s" repeatCount="indefinite" values="0;1;0"/></circle><circle r="0.9" fill="#ef4444"><animate attributeName="cx" dur="1.58s" begin="0.1s" repeatCount="indefinite" values="-8;-61"/><animate attributeName="cy" dur="1.58s" begin="0.1s" repeatCount="indefinite" values="-5;-30"/><animate attributeName="opacity" dur="1.58s" begin="0.1s" repeatCount="indefinite" values="0;1;0"/></circle><circle r="0.9" fill="#fde68a"><animate attributeName="cx" dur="1.79s" begin="0.87s" repeatCount="indefinite" values="-37;-113"/><animate attributeName="cy" dur="1.79s" begin="0.87s" repeatCount="indefinite" values="-3;-37"/><animate attributeName="opacity" dur="1.79s" begin="0.87s" repeatCount="indefinite" values="0;1;0"/></circle><circle r="1.3" fill="#fde68a"><animate attributeName="cx" dur="1.71s" begin="0.2s" repeatCount="indefinite" values="-15;-58"/><animate attributeName="cy" dur="1.71s" begin="0.2s" repeatCount="indefinite" values="1;-21"/><animate attributeName="opacity" dur="1.71s" begin="0.2s" repeatCount="indefinite" values="0;1;0"/></circle><circle r="1.4" fill="#f97316"><animate attributeName="cx" dur="2.0s" begin="0.27s" repeatCount="indefinite" values="-33;-109"/><animate attributeName="cy" dur="2.0s" begin="0.27s" repeatCount="indefinite" values="3;-52"/><animate attributeName="opacity" dur="2.0s" begin="0.27s" repeatCount="indefinite" values="0;1;0"/></circle><circle r="1.3" fill="#fde68a"><animate attributeName="cx" dur="1.72s" begin="0.93s" repeatCount="indefinite" values="-17;-63"/><animate attributeName="cy" dur="1.72s" begin="0.93s" repeatCount="indefinite" values="11;-13"/><animate attributeName="opacity" dur="1.72s" begin="0.93s" repeatCount="indefinite" values="0;1;0"/></circle><circle r="1.1" fill="#f97316"><animate attributeName="cx" dur="1.74s" begin="0.68s" repeatCount="indefinite" values="-13;-102"/><animate attributeName="cy" dur="1.74s" begin="0.68s" repeatCount="indefinite" values="4;-45"/><animate attributeName="opacity" dur="1.74s" begin="0.68s" repeatCount="indefinite" values="0;1;0"/></circle><circle r="1.6" fill="#f97316"><animate attributeName="cx" dur="1.68s" begin="1.31s" repeatCount="indefinite" values="-25;-70"/><animate attributeName="cy" dur="1.68s" begin="1.31s" repeatCount="indefinite" values="12;-27"/><animate attributeName="opacity" dur="1.68s" begin="1.31s" repeatCount="indefinite" values="0;1;0"/></circle><circle r="1.0" fill="#ef4444"><animate attributeName="cx" dur="1.56s" begin="1.14s" repeatCount="indefinite" values="-2;-46"/><animate attributeName="cy" dur="1.56s" begin="1.14s" repeatCount="indefinite" values="-3;-55"/><animate attributeName="opacity" dur="1.56s" begin="1.14s" repeatCount="indefinite" values="0;1;0"/></circle>
+    <circle r="1.6" fill="#f59e0b"><animate attributeName="cx" dur="1.4s" repeatCount="indefinite" values="-24;-84"/><animate attributeName="cy" dur="1.4s" repeatCount="indefinite" values="6;26"/><animate attributeName="opacity" dur="1.4s" repeatCount="indefinite" values="1;0"/></circle>
+    <circle r="1.2" fill="#22d3ee"><animate attributeName="cx" dur="1.9s" repeatCount="indefinite" values="-30;-110"/><animate attributeName="cy" dur="1.9s" repeatCount="indefinite" values="0;-12"/><animate attributeName="opacity" dur="1.9s" repeatCount="indefinite" values="1;0"/></circle>
+    <circle r="1.1" fill="#a78bfa"><animate attributeName="cx" dur="1.6s" begin=".5s" repeatCount="indefinite" values="-26;-90"/><animate attributeName="cy" dur="1.6s" begin=".5s" repeatCount="indefinite" values="10;40"/><animate attributeName="opacity" dur="1.6s" begin=".5s" repeatCount="indefinite" values="1;0"/></circle>
+  </g>
+</g></svg></div>
+  </header>
+
+  <div class="grid">
+    <aside>
+      <section class="rv">
+        <h2 data-es="Habilidades" data-en="Skills">Habilidades</h2>
+        <div class="sg"><h4>Backend</h4><div class="chips"><span class="chip">Python</span><span class="chip">Django</span><span class="chip">Django REST Framework</span><span class="chip">NestJS</span><span class="chip">Node.js</span><span class="chip">Flask</span><span class="chip">TypeScript</span></div></div>
+        <div class="sg"><h4 data-es="Bases de datos" data-en="Databases">Bases de datos</h4><div class="chips"><span class="chip">PostgreSQL</span><span class="chip">MySQL</span><span class="chip">SQL</span><span class="chip" data-es="Modelado relacional" data-en="Relational modeling">Modelado relacional</span></div></div>
+        <div class="sg"><h4 data-es="Seguridad y APIs" data-en="Security &amp; APIs">Seguridad y APIs</h4><div class="chips"><span class="chip">REST</span><span class="chip">JWT</span><span class="chip">OAuth2</span><span class="chip">RBAC</span><span class="chip">Swagger / OpenAPI</span></div></div>
+        <div class="sg"><h4 data-es="Herramientas" data-en="Tools">Herramientas</h4><div class="chips"><span class="chip">Git</span><span class="chip">GitHub</span><span class="chip">Docker</span><span class="chip">Vercel</span><span class="chip" data-es="AWS (básico)" data-en="AWS (basic)">AWS (básico)</span></div></div>
+        <div class="sg"><h4>Frontend</h4><div class="chips"><span class="chip">JavaScript</span><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">React</span><span class="chip">Next.js</span></div></div>
+        <div class="sg"><h4 data-es="Aprendiendo" data-en="Learning">Aprendiendo</h4><div class="chips"><span class="chip">FastAPI</span><span class="chip">Go</span><span class="chip">Rust</span></div></div>
+      </section>
+      <section class="rv edu">
+        <h2 data-es="Educación" data-en="Education">Educación</h2>
+        <b data-es="Ingeniería de Sistemas" data-en="B.S. Systems Engineering">Ingeniería de Sistemas</b>
+        <small data-es="UNEFA — Universidad Nacional Experimental Politécnica de la Fuerza Armada" data-en="UNEFA — National Experimental Polytechnic University of the Armed Forces">UNEFA — Universidad Nacional Experimental Politécnica de la Fuerza Armada</small>
+        <small class="mono" data-es="oct. 2021 – dic. 2026" data-en="Oct 2021 – Dec 2026">oct. 2021 – dic. 2026</small>
+        <small data-es="Carrera y Trabajo Especial de Grado culminados · acto de grado en diciembre de 2026" data-en="Coursework and thesis completed · graduation ceremony December 2026">Carrera y Trabajo Especial de Grado culminados · acto de grado en diciembre de 2026</small>
+        <span class="badge" data-es="Tesis aprobada · 20/20" data-en="Thesis graded · 20/20">Tesis aprobada · 20/20</span>
+      </section>
+      <section class="rv">
+        <h2 data-es="Idiomas" data-en="Languages">Idiomas</h2>
+        <div class="lang"><span data-es="Español" data-en="Spanish">Español</span><span data-es="Nativo" data-en="Native">Nativo</span></div><div class="meter"><i style="--w:100%"></i></div>
+        <div class="lang"><span data-es="Inglés" data-en="English">Inglés</span><span data-es="Técnico · en progreso" data-en="Technical · improving">Técnico · en progreso</span></div><div class="meter"><i style="--w:45%"></i></div>
+      </section>
+      <section class="rv">
+        <h2 data-es="Comunidad" data-en="Community">Comunidad</h2>
+        <div class="chips"><span class="chip">Solana LATAM Builders</span><span class="chip">Solana Allstars Venezuela</span><span class="chip">Tuy Tech</span></div>
+      </section>
+    </aside>
+
+    <main>
+      <section class="rv">
+        <h2 data-es="Perfil" data-en="Profile">Perfil</h2>
+        <p class="lead" data-es="Ingeniero de Sistemas y <b>desarrollador backend</b> con casi 2 años de experiencia construyendo sistemas en producción para instituciones públicas con <b>Python (Django REST Framework)</b>, <b>TypeScript (NestJS)</b> y <b>PostgreSQL</b>. Diseño APIs REST seguras (JWT, OAuth2, RBAC), modelos de datos sólidos y soluciones que digitalizan procesos manuales. Aprendo rápido, trabajo de forma asíncrona y me enfoco en código limpio y mantenible." data-en="Systems Engineer and <b>backend developer</b> with almost 2 years building production systems for public institutions with <b>Python (Django REST Framework)</b>, <b>TypeScript (NestJS)</b> and <b>PostgreSQL</b>. I design secure REST APIs (JWT, OAuth2, RBAC), solid data models and solutions that digitize manual processes. I learn fast, work asynchronously and focus on clean, maintainable code.">Ingeniero de Sistemas y <b>desarrollador backend</b> con casi 2 años de experiencia construyendo sistemas en producción para instituciones públicas con <b>Python (Django REST Framework)</b>, <b>TypeScript (NestJS)</b> y <b>PostgreSQL</b>. Diseño APIs REST seguras (JWT, OAuth2, RBAC), modelos de datos sólidos y soluciones que digitalizan procesos manuales. Aprendo rápido, trabajo de forma asíncrona y me enfoco en código limpio y mantenible.</p>
+      </section>
+
+      <section class="rv">
+        <h2 data-es="Experiencia" data-en="Experience">Experiencia</h2>
+        <div class="tl"><span class="fill"></span>
+          <div class="job">
+            <div class="job-h"><h3 data-es="Programador Backend" data-en="Backend Developer">Programador Backend</h3><span class="when" data-es="abr. 2026 – actualidad" data-en="Apr 2026 – Present">abr. 2026 – actualidad</span></div>
+            <div class="org" data-es="Organismo público del sector telecomunicaciones · Caracas" data-en="Public telecommunications agency · Caracas">Organismo público del sector telecomunicaciones · Caracas</div>
+            <ul>
+              <li data-es="Desarrollo sistemas de información a la medida que digitalizan procesos internos que antes eran manuales." data-en="Build custom information systems that digitize internal processes that used to be manual.">Desarrollo sistemas de información a la medida que digitalizan procesos internos que antes eran manuales.</li>
+              <li data-es="Levanto requerimientos con las unidades usuarias, diseño el modelo de datos e implemento las APIs REST de cada módulo." data-en="Gather requirements with business users, design the data model and implement each module's REST APIs.">Levanto requerimientos con las unidades usuarias, diseño el modelo de datos e implemento las APIs REST de cada módulo.</li>
+              <li data-es="Implemento autenticación y control de acceso por roles (RBAC) para proteger información sensible." data-en="Implement authentication and role-based access control (RBAC) to protect sensitive data.">Implemento autenticación y control de acceso por roles (RBAC) para proteger información sensible.</li>
+              <li data-es="Doy mantenimiento, soporte y mejora continua a aplicaciones en producción." data-en="Maintain, support and continuously improve production applications.">Doy mantenimiento, soporte y mejora continua a aplicaciones en producción.</li>
+            </ul>
+          </div>
+          <div class="job">
+            <div class="job-h"><h3>Backend Developer (Full Stack)</h3><span class="when" data-es="feb. 2025 – abr. 2026" data-en="Feb 2025 – Apr 2026">feb. 2025 – abr. 2026</span></div>
+            <div class="org" data-es="Institución pública del sector justicia · Caracas" data-en="Public justice-sector institution · Caracas">Institución pública del sector justicia · Caracas</div>
+            <ul>
+              <li data-es="Desarrollé el sistema de gestión de beneficios para personal activo, jubilados y pensionados, que reemplazó el control manual en Excel y mejoró la trazabilidad." data-en="Built a benefits management system for active and retired staff that replaced manual Excel tracking and improved traceability.">Desarrollé el sistema de gestión de beneficios para personal activo, jubilados y pensionados, que reemplazó el control manual en Excel y mejoró la trazabilidad.</li>
+              <li data-es="Construí el sistema de gestión de personal y cargos, con reportes dinámicos de filtros combinables." data-en="Built a personnel and positions management system with dynamic reports and combinable filters.">Construí el sistema de gestión de personal y cargos, con reportes dinámicos de filtros combinables.</li>
+              <li data-es="APIs REST con Django REST Framework y NestJS documentadas con Swagger / OpenAPI; autenticación JWT y RBAC." data-en="REST APIs with Django REST Framework and NestJS documented with Swagger / OpenAPI; JWT auth and RBAC.">APIs REST con Django REST Framework y NestJS documentadas con Swagger / OpenAPI; autenticación JWT y RBAC.</li>
+              <li data-es="Diseño de bases de datos PostgreSQL y depuración de datos heredados (menos duplicados e inconsistencias)." data-en="PostgreSQL database design and legacy data cleanup (fewer duplicates and inconsistencies).">Diseño de bases de datos PostgreSQL y depuración de datos heredados (menos duplicados e inconsistencias).</li>
+              <li data-es="Colaboré en el módulo de servicio médico: citas, evaluaciones, tratamientos y control de medicamentos." data-en="Contributed to a medical service module: appointments, evaluations, treatments and medication tracking.">Colaboré en el módulo de servicio médico: citas, evaluaciones, tratamientos y control de medicamentos.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="rv">
+        <h2 data-es="Proyectos" data-en="Projects">Proyectos</h2>
+        <div class="projs">
+          <div class="pj"><h3 data-es="Inventario y facturación multimoneda" data-en="Multi-currency inventory &amp; billing">Inventario y facturación multimoneda</h3><p data-es="Ventas, inventario y facturación en VES, USD y EUR; cuentas por cobrar con abonos y vencimientos; roles con JWT." data-en="Sales, inventory and invoicing in VES, USD and EUR; accounts receivable with partial payments; JWT roles.">Ventas, inventario y facturación en VES, USD y EUR; cuentas por cobrar con abonos y vencimientos; roles con JWT.</p><div class="t"><span>Django</span><span>DRF</span><span>PostgreSQL</span><span>JWT</span></div></div>
+          <div class="pj"><h3 data-es="Sistema de gestión académica — tesis 20/20" data-en="Academic management system — thesis 20/20">Sistema de gestión académica — tesis 20/20</h3><p data-es="Proyectos académicos, evaluaciones y entregas con fecha límite; 4 roles (Admin, Coordinador, Profesor, Estudiante)." data-en="Academic projects, grading and deadline-based submissions; 4 roles (Admin, Coordinator, Professor, Student).">Proyectos académicos, evaluaciones y entregas con fecha límite; 4 roles (Admin, Coordinador, Profesor, Estudiante).</p><div class="t"><span>TypeScript</span><span>NestJS</span><span>PostgreSQL</span></div></div>
+          <div class="pj wide"><h3 data-es="API para agencia de viajes" data-en="Travel agency API">API para agencia de viajes</h3><p data-es="Catálogo de paquetes con disponibilidad, precios, fechas y duración; reseñas y valoraciones con validaciones de integridad." data-en="Package catalog with availability, pricing, dates and duration; reviews and ratings with integrity validations.">Catálogo de paquetes con disponibilidad, precios, fechas y duración; reseñas y valoraciones con validaciones de integridad.</p><div class="t"><span>Python</span><span>Flask</span><span>SQL</span></div></div>
+        </div>
+      </section>
+    </main>
+  </div>
+</article>
+</div>
+<footer>© <span id="yr"></span> José Fernando Bolívar · <a href="./" style="color:var(--a)">jfernandobolivar.github.io</a></footer>
+
+<script>
+(() => {
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  $('#yr').textContent = new Date().getFullYear();
+  let lang = (() => { try { return localStorage.getItem('lang') } catch (e) { return null } })() || (navigator.language.startsWith('es') ? 'es' : 'en');
+  const roles = { es: ['Desarrollador Backend', 'APIs REST · Django · NestJS', 'PostgreSQL · Seguridad · Automatización'], en: ['Backend Developer', 'REST APIs · Django · NestJS', 'PostgreSQL · Security · Automation'] };
+  const setLang = l => { lang = l; document.documentElement.lang = l; $$('[data-es]').forEach(e => e.innerHTML = e.dataset[l]); $('#lang').textContent = l === 'es' ? 'EN' : 'ES'; try { localStorage.setItem('lang', l) } catch (e) {} };
+  setLang(lang); $('#lang').onclick = () => setLang(lang === 'es' ? 'en' : 'es');
+  $('#print').onclick = () => window.print();
+
+  const typed = $('#typed'); let ri = 0, ci = 0, del = false;
+  const tick = () => { const w = roles[lang][ri % roles[lang].length]; typed.textContent = w.slice(0, ci);
+    if (!del && ci < w.length) ci++; else if (del && ci > 0) ci--; else { del = !del; if (!del) ri++; }
+    setTimeout(tick, del ? 30 : (ci === w.length ? 1800 : 65)); };
+  if (reduce) typed.textContent = roles[lang][0]; else tick();
+  addEventListener('beforeprint', () => typed.textContent = roles[lang][0]);
+
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });
+  $$('.rv').forEach((el, i) => { el.style.transitionDelay = (Math.min(i, 6) * 70) + 'ms'; io.observe(el); });
+
+  $$('.pj').forEach(c => c.addEventListener('mousemove', e => { const r = c.getBoundingClientRect(); c.style.setProperty('--x', (e.clientX - r.left) + 'px'); c.style.setProperty('--y', (e.clientY - r.top) + 'px'); }));
+
+  // rising embers in the background
+  const cv = $('#bg'), g = cv.getContext('2d'); let P = [];
+  const fit = () => { const d = devicePixelRatio || 1; cv.width = innerWidth * d; cv.height = innerHeight * d; g.setTransform(d, 0, 0, d, 0, 0); };
+  fit(); addEventListener('resize', fit);
+  const cols = ['251,191,36', '249,115,22', '239,68,68', '34,211,238'];
+  const loop = () => {
+    g.clearRect(0, 0, innerWidth, innerHeight);
+    if (Math.random() < .3) P.push({ x: Math.random() * innerWidth, y: innerHeight + 5, vx: (Math.random() - .5) * .3, vy: -(.3 + Math.random() * .7), l: 1, r: .6 + Math.random() * 1.6, c: cols[Math.random() * (Math.random() < .8 ? 3 : 4) | 0] });
+    g.globalCompositeOperation = 'lighter';
+    P = P.filter(p => (p.l -= .004) > 0 && p.y > -10);
+    for (const p of P) { p.x += p.vx + Math.sin(p.y * .02) * .15; p.y += p.vy; g.beginPath(); g.fillStyle = `rgba(${p.c},${p.l * .7})`; g.shadowColor = `rgba(${p.c},${p.l})`; g.shadowBlur = 8; g.arc(p.x, p.y, p.r, 0, 7); g.fill(); }
+    requestAnimationFrame(loop);
+  };
+  if (!reduce) requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
