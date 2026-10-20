@@ -14,12 +14,12 @@
 <style>
 :root{
   --bg:#0b1120; --bg2:#0f172a; --card:#111a2e; --line:#1e293b; --text:#e2e8f0; --muted:#94a3b8;
-  --accent:#22d3ee; --accent2:#a78bfa; --accent3:#34d399; --shadow:0 10px 40px rgba(0,0,0,.35);
+  --accent:#22d3ee; --accent2:#f5b041; --accent3:#34d399; --shadow:0 10px 40px rgba(0,0,0,.35);
   --grid:rgba(148,163,184,.06);
 }
 [data-theme="light"]{
   --bg:#f8fafc; --bg2:#eef2f7; --card:#ffffff; --line:#e2e8f0; --text:#0f172a; --muted:#475569;
-  --accent:#0891b2; --accent2:#7c3aed; --accent3:#059669; --shadow:0 10px 30px rgba(15,23,42,.08);
+  --accent:#0891b2; --accent2:#c2780a; --accent3:#059669; --shadow:0 10px 30px rgba(15,23,42,.08);
   --grid:rgba(15,23,42,.05);
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -54,7 +54,7 @@ nav.scrolled{background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-fi
 /* hero */
 .hero{position:relative;min-height:100vh;display:flex;align-items:center;padding-top:90px;overflow:hidden}
 .hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(ellipse at 50% 40%,#000 30%,transparent 75%)}
-.blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.35;animation:float 14s ease-in-out infinite}
+.blob{position:absolute;border-radius:50%;filter:blur(60px);opacity:.28;animation:float 14s ease-in-out infinite;will-change:transform}
 .b1{width:420px;height:420px;background:var(--accent);top:-80px;right:-60px}
 .b2{width:360px;height:360px;background:var(--accent2);bottom:-100px;left:-80px;animation-delay:-6s}
 @keyframes float{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(40px,30px) scale(1.1)}}
@@ -197,14 +197,34 @@ footer{padding:40px 0;text-align:center;color:var(--muted);font-size:.85rem}
 @media (max-width:520px){.proj{height:470px}}
 
 
-/* phoenix companion */
-#embers{position:fixed;inset:0;width:100%;height:100%;z-index:39;pointer-events:none}
-#phx{position:fixed;left:0;top:0;width:150px;height:auto;z-index:40;pointer-events:none;opacity:0;transition:opacity .8s;will-change:transform;filter:drop-shadow(0 0 18px rgba(34,211,238,.25))}
-#phx.on{opacity:.92}
-[data-theme="light"] #phx{filter:drop-shadow(0 0 10px rgba(124,58,237,.25))}
-.motto{margin-top:18px;font-family:"JetBrains Mono",monospace;font-size:.85rem;color:var(--accent);letter-spacing:.04em}
-@media (max-width:700px){#phx{width:96px}}
 
+
+/* phoenix stage (static image + GPU-only animations) */
+.phx-stage{position:relative;margin:0;aspect-ratio:960/547;border-radius:28px;overflow:hidden;background:radial-gradient(120% 90% at 50% 45%,#121a33 0%,#070b16 70%);border:1px solid rgba(245,176,65,.18);box-shadow:0 30px 80px rgba(0,0,0,.45),inset 0 0 80px rgba(34,211,238,.06);isolation:isolate}
+.phx-halo{position:absolute;inset:-10%;background:radial-gradient(40% 45% at 50% 42%,rgba(245,158,11,.35),transparent 70%),radial-gradient(30% 35% at 50% 40%,rgba(34,211,238,.18),transparent 70%);animation:halo 6s ease-in-out infinite;will-change:opacity,transform}
+@keyframes halo{50%{opacity:.6;transform:scale(1.06)}}
+.phx-img{position:relative;display:block;width:100%;height:auto;animation:soar 9s ease-in-out infinite;will-change:transform;transform:translateZ(0)}
+@keyframes soar{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(0,-10px,0) scale(1.015)}}
+.embers{position:absolute;inset:0;pointer-events:none}
+.embers i{position:absolute;bottom:-6px;width:4px;height:4px;border-radius:50%;background:#fbbf24;box-shadow:0 0 8px 2px rgba(249,115,22,.7);opacity:0;animation:rise 7s linear infinite;will-change:transform,opacity}
+.embers i:nth-child(1){left:12%;animation-delay:0s}.embers i:nth-child(2){left:24%;animation-delay:1.4s;animation-duration:8s}
+.embers i:nth-child(3){left:36%;animation-delay:3.1s}.embers i:nth-child(4){left:48%;animation-delay:.7s;animation-duration:9s}
+.embers i:nth-child(5){left:58%;animation-delay:2.2s}.embers i:nth-child(6){left:68%;animation-delay:4s;animation-duration:6.5s}
+.embers i:nth-child(7){left:78%;animation-delay:1s}.embers i:nth-child(8){left:86%;animation-delay:5s;animation-duration:8.5s}
+.embers i:nth-child(9){left:30%;animation-delay:5.6s;width:3px;height:3px}.embers i:nth-child(10){left:72%;animation-delay:6.2s;width:3px;height:3px;background:#67e8f9;box-shadow:0 0 8px 2px rgba(34,211,238,.6)}
+@keyframes rise{0%{transform:translate3d(0,0,0);opacity:0}10%{opacity:1}100%{transform:translate3d(14px,-420px,0);opacity:0}}
+.phx-stage::after{content:"";position:absolute;inset:0;border-radius:28px;background:linear-gradient(180deg,transparent 70%,rgba(7,11,22,.55));pointer-events:none}
+/* performance on phones */
+@media (max-width:900px),(pointer:coarse){
+  .blob{display:none}
+  nav.scrolled{backdrop-filter:none;background:var(--bg)}
+  .embers i:nth-child(n+6){display:none}
+  .hero::before{mask-image:none;-webkit-mask-image:none;opacity:.5}
+  .reveal{transition-duration:.5s}
+}
+
+.paused *{animation-play-state:paused!important}
+@media (max-width:900px){.phx-stage{order:-1;width:100%;max-width:440px;margin:0 auto 6px;border-radius:22px}}
 /* reveal */
 .reveal{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
 .reveal.in{opacity:1;transform:none}
@@ -229,47 +249,6 @@ footer{padding:40px 0;text-align:center;color:var(--muted);font-size:.85rem}
 <body>
 <div id="progress"></div>
 <div id="glow"></div>
-<canvas id="embers" aria-hidden="true"></canvas>
-<svg id="phx" viewBox="-140 -95 200 155" aria-hidden="true"><defs>
-<linearGradient id="tailS" x1="0" y1="0" x2="1" y2="0" gradientUnits="objectBoundingBox">
-  <stop offset="0" stop-color="#f59e0b" stop-opacity="0"/><stop offset=".35" stop-color="#f59e0b" stop-opacity=".55"/><stop offset=".7" stop-color="#a78bfa" stop-opacity=".85"/><stop offset="1" stop-color="#22d3ee"/></linearGradient>
-<linearGradient id="wingS" x1="0" y1="1" x2="0" y2="0">
-  <stop offset="0" stop-color="#22d3ee" stop-opacity=".45"/><stop offset=".6" stop-color="#a78bfa" stop-opacity=".25"/><stop offset="1" stop-color="#f59e0b" stop-opacity=".35"/></linearGradient>
-<linearGradient id="wingbS" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#a78bfa" stop-opacity=".3"/><stop offset="1" stop-color="#a78bfa" stop-opacity=".05"/></linearGradient>
-<linearGradient id="bodyS" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#a78bfa"/><stop offset="1" stop-color="#22d3ee"/></linearGradient>
-<linearGradient id="firegS" x1="0" y1="0" x2="1" y2="0" gradientUnits="objectBoundingBox">
-  <stop offset="0" stop-color="#dc2626" stop-opacity="0"/><stop offset=".4" stop-color="#f97316" stop-opacity=".7"/><stop offset=".8" stop-color="#fbbf24" stop-opacity=".9"/><stop offset="1" stop-color="#fde68a"/></linearGradient>
-<radialGradient id="coreS"><stop offset="0" stop-color="#fbbf24" stop-opacity=".55"/><stop offset=".5" stop-color="#f97316" stop-opacity=".25"/><stop offset="1" stop-color="#dc2626" stop-opacity="0"/></radialGradient>
-<filter id="fireS" x="-60%" y="-60%" width="220%" height="220%">
-  <feTurbulence type="fractalNoise" baseFrequency="0.035 0.09" numOctaves="2" seed="3" result="n">
-    <animate attributeName="baseFrequency" dur="1.6s" repeatCount="indefinite" values="0.035 0.09;0.045 0.12;0.035 0.09"/></feTurbulence>
-  <feDisplacementMap in="SourceGraphic" in2="n" scale="9" xChannelSelector="R" yChannelSelector="G" result="d"/>
-  <feGaussianBlur in="d" stdDeviation="1.6" result="b"/>
-  <feMerge><feMergeNode in="b"/><feMergeNode in="d"/></feMerge></filter>
-<filter id="glowS" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
-<g transform="scale(1.0)">
-  <ellipse cx="14" cy="-2" rx="34" ry="18" fill="url(#coreS)">
-    <animate attributeName="rx" dur="0.9s" repeatCount="indefinite" values="32;38;32"/><animate attributeName="opacity" dur="0.7s" repeatCount="indefinite" values=".8;1;.8"/></ellipse>
-  <g fill="none" stroke="url(#firegS)" stroke-linecap="round" filter="url(#fireS)" opacity=".85">
-    <path d="M-2 1 C-30 6 -58 22 -96 18" stroke-width="7"/>
-    <path d="M-2 0 C-40 -2 -80 -6 -122 -14" stroke-width="5"/>
-    <path d="M-2 4 C-28 18 -50 38 -82 48" stroke-width="5"/>
-  </g>
-  <g fill="none" stroke="url(#tailS)" stroke-linecap="round" filter="url(#glowS)"><path d="M-4 2 C-34 6 -62 22 -96 18 C-108 16 -112 6 -104 2" stroke-width="2.2"><animate attributeName="d" dur="1.9s" repeatCount="indefinite" values="M-4 2 C-34 6 -62 22 -96 18 C-108 16 -112 6 -104 2;M-4 2 C-34 12 -64 14 -98 24 C-110 26 -116 16 -108 10;M-4 2 C-34 6 -62 22 -96 18 C-108 16 -112 6 -104 2" calcMode="spline" keyTimes="0;.5;1" keySplines=".4 0 .6 1;.4 0 .6 1"/></path><path d="M-4 0 C-40 -2 -76 -6 -118 -16 C-128 -18 -132 -10 -124 -6" stroke-width="1.8"><animate attributeName="d" dur="2.3s" repeatCount="indefinite" values="M-4 0 C-40 -2 -76 -6 -118 -16 C-128 -18 -132 -10 -124 -6;M-4 0 C-40 4 -78 -12 -120 -8 C-130 -6 -132 2 -124 4;M-4 0 C-40 -2 -76 -6 -118 -16 C-128 -18 -132 -10 -124 -6" calcMode="spline" keyTimes="0;.5;1" keySplines=".4 0 .6 1;.4 0 .6 1"/></path><path d="M-4 4 C-28 18 -48 40 -80 50 C-90 52 -94 44 -88 40" stroke-width="1.6"><animate attributeName="d" dur="1.7s" repeatCount="indefinite" values="M-4 4 C-28 18 -48 40 -80 50 C-90 52 -94 44 -88 40;M-4 4 C-30 22 -54 34 -84 44 C-94 46 -96 38 -90 34;M-4 4 C-28 18 -48 40 -80 50 C-90 52 -94 44 -88 40" calcMode="spline" keyTimes="0;.5;1" keySplines=".4 0 .6 1;.4 0 .6 1"/></path><path d="M-4 1 C-36 10 -70 34 -104 36" stroke-width="1.2"><animate attributeName="d" dur="2.0s" repeatCount="indefinite" values="M-4 1 C-36 10 -70 34 -104 36;M-4 1 C-36 16 -72 26 -106 42;M-4 1 C-36 10 -70 34 -104 36" calcMode="spline" keyTimes="0;.5;1" keySplines=".4 0 .6 1;.4 0 .6 1"/></path></g>
-  <g transform="translate(12,-4)"><g fill="url(#wingbS)" stroke="#a78bfa" stroke-opacity=".7" stroke-width=".8" opacity=".6"><path d="M0 0 Q2.7 -19.0 -12.0 -39.1 Q-7.4 -21.4 0 0Z"/><path d="M0 0 Q-3.5 -24.8 -24.9 -48.2 Q-14.5 -26.2 0 0Z"/><path d="M0 0 Q-10.8 -26.7 -39.1 -49.0 Q-22.2 -26.5 0 0Z"/><path d="M0 0 Q-16.3 -24.1 -49.0 -40.4 Q-27.6 -21.6 0 0Z"/><path d="M0 0 Q-18.3 -18.5 -50.4 -25.6 Q-28.2 -13.3 0 0Z"/><path d="M0 0 Q-16.4 -12.3 -42.6 -10.2 Q-23.7 -4.8 0 0Z"/>
-    <animateTransform attributeName="transform" type="rotate" dur="1.15s" repeatCount="indefinite" values="8;-34;8" calcMode="spline" keyTimes="0;.5;1" keySplines=".4 0 .6 1;.4 0 .6 1" begin="-0.15s"/></g></g>
-  <path d="M-6 2 C4 -4 16 -6 24 -8 C30 -10 34 -16 40 -16 C44 -16 47 -14 50 -12 L44 -10.5 C40 -10 36 -6 30 -2 C20 4 6 6 -6 2Z" fill="#0b1120" stroke="url(#bodyS)" stroke-width="1.5" filter="url(#glowS)"/>
-  <g fill="none" stroke="url(#bodyS)" stroke-width="1.2" stroke-linecap="round">
-    <path d="M41 -16 C38 -24 32 -28 25 -29"/><path d="M43 -16 C42 -26 37 -33 30 -37"/><path d="M39 -15 C34 -20 28 -21 21 -21"/></g>
-  <circle cx="42.5" cy="-13.2" r="1.1" fill="#f8fafc"/>
-  <g transform="translate(14,-5)"><g fill="url(#wingS)" stroke="url(#bodyS)" stroke-width="1" filter="url(#glowS)"><path d="M0 0 Q5.0 -22.8 -10.3 -48.9 Q-6.6 -26.8 0 0Z"/><path d="M0 0 Q-2.0 -30.2 -25.1 -60.8 Q-14.6 -33.2 0 0Z"/><path d="M0 0 Q-10.9 -33.7 -43.0 -64.3 Q-24.4 -34.9 0 0Z"/><path d="M0 0 Q-19.2 -32.3 -58.8 -57.4 Q-33.0 -31.0 0 0Z"/><path d="M0 0 Q-24.5 -26.7 -67.2 -41.9 Q-37.5 -22.3 0 0Z"/><path d="M0 0 Q-25.4 -19.1 -65.2 -22.7 Q-36.2 -11.7 0 0Z"/><path d="M0 0 Q-22.2 -11.9 -53.7 -5.3 Q-29.7 -2.0 0 0Z"/>
-    <animateTransform attributeName="transform" type="rotate" dur="1.15s" repeatCount="indefinite" values="10;-40;10" calcMode="spline" keyTimes="0;.5;1" keySplines=".4 0 .6 1;.4 0 .6 1"/></g></g>
-  <g><circle r="1.2" fill="#fbbf24"><animate attributeName="cx" dur="1.18s" begin="0.8s" repeatCount="indefinite" values="-20;-69"/><animate attributeName="cy" dur="1.18s" begin="0.8s" repeatCount="indefinite" values="6;-17"/><animate attributeName="opacity" dur="1.18s" begin="0.8s" repeatCount="indefinite" values="0;1;0"/></circle><circle r="0.9" fill="#ef4444"><animate attributeName="cx" dur="1.58s" begin="0.1s" repeatCount="indefinite" values="-8;-61"/><animate attributeName="cy" dur="1.58s" begin="0.1s" repeatCount="indefinite" values="-5;-30"/><animate attributeName="opacity" dur="1.58s" begin="0.1s" repeatCount="indefinite" values="0;1;0"/></circle><circle r="0.9" fill="#fde68a"><animate attributeName="cx" dur="1.79s" begin="0.87s" repeatCount="indefinite" values="-37;-113"/><animate attributeName="cy" dur="1.79s" begin="0.87s" repeatCount="indefinite" values="-3;-37"/><animate attributeName="opacity" dur="1.79s" begin="0.87s" repeatCount="indefinite" values="0;1;0"/></circle><circle r="1.3" fill="#fde68a"><animate attributeName="cx" dur="1.71s" begin="0.2s" repeatCount="indefinite" values="-15;-58"/><animate attributeName="cy" dur="1.71s" begin="0.2s" repeatCount="indefinite" values="1;-21"/><animate attributeName="opacity" dur="1.71s" begin="0.2s" repeatCount="indefinite" values="0;1;0"/></circle><circle r="1.4" fill="#f97316"><animate attributeName="cx" dur="2.0s" begin="0.27s" repeatCount="indefinite" values="-33;-109"/><animate attributeName="cy" dur="2.0s" begin="0.27s" repeatCount="indefinite" values="3;-52"/><animate attributeName="opacity" dur="2.0s" begin="0.27s" repeatCount="indefinite" values="0;1;0"/></circle><circle r="1.3" fill="#fde68a"><animate attributeName="cx" dur="1.72s" begin="0.93s" repeatCount="indefinite" values="-17;-63"/><animate attributeName="cy" dur="1.72s" begin="0.93s" repeatCount="indefinite" values="11;-13"/><animate attributeName="opacity" dur="1.72s" begin="0.93s" repeatCount="indefinite" values="0;1;0"/></circle><circle r="1.1" fill="#f97316"><animate attributeName="cx" dur="1.74s" begin="0.68s" repeatCount="indefinite" values="-13;-102"/><animate attributeName="cy" dur="1.74s" begin="0.68s" repeatCount="indefinite" values="4;-45"/><animate attributeName="opacity" dur="1.74s" begin="0.68s" repeatCount="indefinite" values="0;1;0"/></circle><circle r="1.6" fill="#f97316"><animate attributeName="cx" dur="1.68s" begin="1.31s" repeatCount="indefinite" values="-25;-70"/><animate attributeName="cy" dur="1.68s" begin="1.31s" repeatCount="indefinite" values="12;-27"/><animate attributeName="opacity" dur="1.68s" begin="1.31s" repeatCount="indefinite" values="0;1;0"/></circle><circle r="1.0" fill="#ef4444"><animate attributeName="cx" dur="1.56s" begin="1.14s" repeatCount="indefinite" values="-2;-46"/><animate attributeName="cy" dur="1.56s" begin="1.14s" repeatCount="indefinite" values="-3;-55"/><animate attributeName="opacity" dur="1.56s" begin="1.14s" repeatCount="indefinite" values="0;1;0"/></circle>
-    <circle r="1.6" fill="#f59e0b"><animate attributeName="cx" dur="1.4s" repeatCount="indefinite" values="-24;-84"/><animate attributeName="cy" dur="1.4s" repeatCount="indefinite" values="6;26"/><animate attributeName="opacity" dur="1.4s" repeatCount="indefinite" values="1;0"/></circle>
-    <circle r="1.2" fill="#22d3ee"><animate attributeName="cx" dur="1.9s" repeatCount="indefinite" values="-30;-110"/><animate attributeName="cy" dur="1.9s" repeatCount="indefinite" values="0;-12"/><animate attributeName="opacity" dur="1.9s" repeatCount="indefinite" values="1;0"/></circle>
-    <circle r="1.1" fill="#a78bfa"><animate attributeName="cx" dur="1.6s" begin=".5s" repeatCount="indefinite" values="-26;-90"/><animate attributeName="cy" dur="1.6s" begin=".5s" repeatCount="indefinite" values="10;40"/><animate attributeName="opacity" dur="1.6s" begin=".5s" repeatCount="indefinite" values="1;0"/></circle>
-  </g>
-</g></svg>
 
 <nav id="nav">
   <div class="wrap nav-in">
@@ -311,10 +290,11 @@ footer{padding:40px 0;text-align:center;color:var(--muted);font-size:.85rem}
           <a href="mailto:josefernandobolivar2@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
         </div>
       </div>
-      <div class="term reveal d2" aria-hidden="true">
-        <div class="term-bar"><i style="background:#ef4444"></i><i style="background:#f59e0b"></i><i style="background:#22c55e"></i><span class="mono">api — zsh</span></div>
-        <pre class="mono" id="term"></pre>
-      </div>
+      <figure class="phx-stage reveal d2" aria-hidden="true">
+        <div class="phx-halo"></div>
+        <img class="phx-img" src="img/phoenix-960.webp" srcset="img/phoenix-560.webp 560w, img/phoenix-960.webp 960w" sizes="(max-width: 900px) 92vw, 520px" width="960" height="547" alt="" decoding="async" fetchpriority="high">
+        <div class="embers"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </figure>
     </div>
     <div class="stats">
       <div class="stat reveal"><b class="grad" data-count="2" data-suffix="">0</b><span data-es="años en producción" data-en="years in production">años en producción</span></div>
@@ -519,74 +499,7 @@ footer{padding:40px 0;text-align:center;color:var(--muted);font-size:.85rem}
   };
   if (reduce) typed.textContent = roles[lang][0]; else tick();
 
-  // terminal animation
-  const lines = [
-    ['<span class="c">$</span> curl -X POST /api/auth/login', 0],
-    ['<span class="k">{</span> <span class="s">"access"</span>: <span class="y">"eyJhbGciOi..."</span>, <span class="s">"role"</span>: <span class="y">"admin"</span> <span class="k">}</span>', 500],
-    ['', 200],
-    ['<span class="c">$</span> curl /api/facturas?moneda=USD -H "Authorization: Bearer ..."', 700],
-    ['<span class="k">{</span>', 400],
-    ['  <span class="s">"count"</span>: <span class="n">342</span>,', 120],
-    ['  <span class="s">"total_usd"</span>: <span class="n">18450.75</span>,', 120],
-    ['  <span class="s">"total_ves"</span>: <span class="n">671602.30</span>,', 120],
-    ['  <span class="s">"status"</span>: <span class="y">"ok"</span>', 120],
-    ['<span class="k">}</span>', 120],
-    ['', 200],
-    ['<span class="c"># 200 OK · 38 ms · JWT + RBAC OK</span>', 600],
-  ];
-  const term = $('#term');
-  const runTerm = async () => {
-    term.innerHTML = '';
-    for (const [l, d] of lines) { await new Promise(r => setTimeout(r, reduce ? 0 : d)); term.innerHTML += l + '\n'; }
-    if (!reduce) setTimeout(runTerm, 6000);
-  };
-  runTerm();
-
-  // tap to expand project cards (touch)
-  $$('.proj').forEach(c => { c.tabIndex = 0; c.addEventListener('click', e => { if (e.target.closest('a')) return; c.classList.toggle('open'); }); });
-  // fire embers: trail behind the phoenix + soft ambient sparks
-  const cv = $('#embers'), cx2 = cv.getContext('2d'); let parts = [];
-  const fit = () => { const d = devicePixelRatio || 1; cv.width = innerWidth * d; cv.height = innerHeight * d; cx2.setTransform(d, 0, 0, d, 0, 0); };
-  fit(); addEventListener('resize', fit);
-  const cols = ['251,191,36', '249,115,22', '239,68,68', '253,230,138'];
-  window.__ember = (x, y, dir) => {
-    for (let i = 0; i < 3; i++) parts.push({ x: x + (Math.random() - .5) * 14, y: y + (Math.random() - .5) * 10, vx: -dir * (0.6 + Math.random() * 1.4), vy: -(0.3 + Math.random() * 1.1), life: 1, r: .8 + Math.random() * 2.2, c: cols[Math.random() * cols.length | 0] });
-  };
-  const tickE = () => {
-    cx2.clearRect(0, 0, innerWidth, innerHeight);
-    if (Math.random() < .25) parts.push({ x: Math.random() * innerWidth, y: innerHeight + 6, vx: (Math.random() - .5) * .4, vy: -(0.4 + Math.random() * .8), life: 1.4, r: .6 + Math.random() * 1.4, c: cols[Math.random() * cols.length | 0] });
-    cx2.globalCompositeOperation = 'lighter';
-    parts = parts.filter(p => (p.life -= .016) > 0);
-    for (const p of parts) {
-      p.x += p.vx; p.y += p.vy; p.vy -= .006; p.vx *= .99;
-      const a = Math.min(p.life, 1);
-      cx2.beginPath(); cx2.fillStyle = `rgba(${p.c},${a * .85})`; cx2.shadowColor = `rgba(${p.c},${a})`; cx2.shadowBlur = 8;
-      cx2.arc(p.x, p.y, p.r * (0.6 + a * .4), 0, 7); cx2.fill();
-    }
-    requestAnimationFrame(tickE);
-  };
-  if (!reduce) requestAnimationFrame(tickE);
-  // phoenix companion: glides across the page following scroll
-  const phx = $('#phx');
-  if (!reduce) {
-    let cx = -200, cy = innerHeight * .35, tx = cx, ty = cy, face = 1, t0 = performance.now();
-    phx.classList.add('on');
-    const loop = now => {
-      const max = document.documentElement.scrollHeight - innerHeight || 1;
-      const p = scrollY / max, w = innerWidth, h = innerHeight, el = (now - t0) / 1000;
-      const intro = Math.min(el / 3.2, 1);                       // entrance flight from the left
-      const k = p * Math.PI * 5 + el * .25;                      // sweep left-right while scrolling
-      tx = intro < 1 ? -200 + (w * .62 + 200) * (1 - Math.pow(1 - intro, 3)) : w * (.5 + .4 * Math.sin(k)) - 75;
-      ty = h * (.18 + .55 * (.5 + .5 * Math.sin(k * .7 + 1.2))) + Math.sin(el * 1.6) * 10;
-      const dx = tx - cx; cx += dx * .045; cy += (ty - cy) * .045;
-      if (Math.abs(dx) > 2) face = dx > 0 ? 1 : -1;
-      const tilt = Math.max(-18, Math.min(18, (ty - cy) * .25));
-      phx.style.transform = `translate(${cx}px,${cy}px) scaleX(${face}) rotate(${tilt * face}deg)`;
-      const pw = parseFloat(getComputedStyle(phx).width) || 150; if (window.__ember && intro > .05) window.__ember(cx + (face > 0 ? pw * .25 : pw * .75), cy + pw * .62, face);
-      requestAnimationFrame(loop);
-    };
-    requestAnimationFrame(loop);
-  }
+  document.addEventListener('visibilitychange', () => document.documentElement.classList.toggle('paused', document.hidden));
   // reveal + counters
   const io = new IntersectionObserver(es => es.forEach(e => {
     if (!e.isIntersecting) return;
@@ -608,7 +521,7 @@ footer{padding:40px 0;text-align:center;color:var(--muted);font-size:.85rem}
     let cur = ''; secs.forEach(s => { if (y >= s.offsetTop - 140) cur = s.id; });
     navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
   };
-  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  let ticking = false; addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { onScroll(); ticking = false; }); } }, { passive: true }); onScroll();
   $('#burger').onclick = () => $('#links').classList.toggle('open');
   navLinks.forEach(a => a.onclick = () => $('#links').classList.remove('open'));
 
