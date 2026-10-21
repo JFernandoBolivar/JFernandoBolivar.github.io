@@ -53,7 +53,7 @@ h1{font-size:clamp(2.1rem,4.6vw,3.3rem);line-height:1.05;letter-spacing:-.035em;
 .dot{width:7px;height:7px;border-radius:50%;background:#34d399;animation:pulse 2s infinite}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(52,211,153,.6)}100%{box-shadow:0 0 0 9px rgba(52,211,153,0)}}
 .emblem{position:relative;z-index:1;width:230px;justify-self:end}
-.emblem img{width:100%;height:auto;display:block;animation:drift 9s ease-in-out infinite;will-change:transform;-webkit-mask-image:radial-gradient(closest-side,#000 70%,transparent);mask-image:radial-gradient(closest-side,#000 70%,transparent)}
+.emblem img{width:100%;height:auto;display:block;-webkit-mask-image:radial-gradient(closest-side,#000 70%,transparent);mask-image:radial-gradient(closest-side,#000 70%,transparent)}
 @keyframes hover{50%{transform:translateY(-8px)}}
 @keyframes drift{0%,100%{transform:translate3d(-22px,4px,0) rotate(-3deg)}25%{transform:translate3d(0,-8px,0) rotate(0deg)}50%{transform:translate3d(22px,2px,0) rotate(3deg)}75%{transform:translate3d(0,-6px,0) rotate(0deg)}}
 
